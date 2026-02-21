@@ -496,10 +496,16 @@ export default function Home() {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="pb-8">
-                    <p className="text-stone-400 leading-relaxed mb-6 max-w-2xl">
-                      {project.description}
-                    </p>
-                    <ProjectPhotoScroll photos={project.photos} title={project.title} />
+                    <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+                      <div className="md:w-1/2 flex-shrink-0">
+                        <p className="text-stone-400 leading-relaxed">
+                          {project.description}
+                        </p>
+                      </div>
+                      <div className="md:w-1/2 flex-shrink-0">
+                        <ProjectPhotoSlider photos={project.photos} title={project.title} />
+                      </div>
+                    </div>
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -715,89 +721,64 @@ export default function Home() {
   );
 }
 
-function ProjectPhotoScroll({ photos, title }: { photos: { src: string; alt: string }[]; title: string }) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+function ProjectPhotoSlider({ photos, title }: { photos: { src: string; alt: string }[]; title: string }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const checkScroll = () => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 4);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
-  };
-
-  useEffect(() => {
-    checkScroll();
-    const el = scrollContainerRef.current;
-    if (el) {
-      el.addEventListener("scroll", checkScroll, { passive: true });
-      window.addEventListener("resize", checkScroll);
-    }
-    return () => {
-      el?.removeEventListener("scroll", checkScroll);
-      window.removeEventListener("resize", checkScroll);
-    };
-  }, []);
-
-  const scroll = (direction: "left" | "right") => {
-    const el = scrollContainerRef.current;
-    if (!el) return;
-    const scrollAmount = el.clientWidth * 0.75;
-    el.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
+  const goTo = (index: number) => {
+    if (index < 0) setCurrentIndex(photos.length - 1);
+    else if (index >= photos.length) setCurrentIndex(0);
+    else setCurrentIndex(index);
   };
 
   return (
-    <div className="relative group/scroll">
-      {canScrollLeft && (
-        <button
-          onClick={() => scroll("left")}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-stone-900/80 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/scroll:opacity-100"
-          aria-label="Scroll left"
-          data-testid={`scroll-left-${title.toLowerCase().replace(/\s+/g, "-")}`}
-        >
-          <ChevronDown className="w-4 h-4 -rotate-90" />
-        </button>
-      )}
-
-      <div
-        ref={scrollContainerRef}
-        className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-      >
+    <div className="relative group/slider rounded-xl overflow-hidden" data-testid={`slider-${title.toLowerCase().replace(/\s+/g, "-")}`}>
+      <div className="relative aspect-[4/3] bg-stone-900">
         {photos.map((photo, i) => (
-          <div
+          <motion.img
             key={i}
-            className="flex-shrink-0 snap-start w-[280px] sm:w-[340px] md:w-[400px] aspect-[4/3] rounded-xl overflow-hidden relative group/photo"
-          >
-            <img
-              src={photo.src}
-              alt={photo.alt}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover/photo:scale-105"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent opacity-0 group-hover/photo:opacity-100 transition-opacity duration-300" />
-          </div>
+            src={photo.src}
+            alt={photo.alt}
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={false}
+            animate={{ opacity: i === currentIndex ? 1 : 0 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            loading="lazy"
+          />
         ))}
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-transparent" />
       </div>
 
-      {canScrollRight && (
-        <button
-          onClick={() => scroll("right")}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-stone-900/80 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/scroll:opacity-100"
-          aria-label="Scroll right"
-          data-testid={`scroll-right-${title.toLowerCase().replace(/\s+/g, "-")}`}
-        >
-          <ChevronDown className="w-4 h-4 rotate-90" />
-        </button>
-      )}
-
       {photos.length > 1 && (
-        <div className="flex justify-center gap-1.5 mt-3">
-          {photos.map((_, i) => (
-            <div key={i} className="w-1.5 h-1.5 rounded-full bg-stone-700" />
-          ))}
-        </div>
+        <>
+          <button
+            onClick={() => goTo(currentIndex - 1)}
+            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
+            aria-label="Previous photo"
+            data-testid={`slider-prev-${title.toLowerCase().replace(/\s+/g, "-")}`}
+          >
+            <ChevronDown className="w-4 h-4 -rotate-90" />
+          </button>
+          <button
+            onClick={() => goTo(currentIndex + 1)}
+            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
+            aria-label="Next photo"
+            data-testid={`slider-next-${title.toLowerCase().replace(/\s+/g, "-")}`}
+          >
+            <ChevronDown className="w-4 h-4 rotate-90" />
+          </button>
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            {photos.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentIndex(i)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  i === currentIndex ? "bg-amber-500 w-4" : "bg-stone-500/60 hover:bg-stone-400/80"
+                }`}
+                aria-label={`Go to photo ${i + 1}`}
+              />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
