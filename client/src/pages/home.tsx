@@ -32,6 +32,7 @@ import dani3 from "@assets/Dani_(3)_1771707549350.jpg";
 import ciro1 from "@assets/Ciro_(1)_1771707549351.jpg";
 import ciro2 from "@assets/Ciro_(2)_1771707549351.jpg";
 import ciro3 from "@assets/Ciro_(3)_1771707549351.jpg";
+import heroPhoto from "@assets/Silas_12_1771708035525.jpg";
 
 function FadeInSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -375,14 +376,18 @@ export default function Home() {
             className="order-1 lg:order-2 flex justify-center"
           >
             <div className="relative w-72 md:w-80 lg:w-96">
-              <div className="absolute -inset-4 bg-gradient-to-br from-amber-800/20 via-transparent to-stone-800/20 rounded-2xl blur-2xl" />
+              <div className="absolute -inset-8 bg-gradient-to-br from-amber-700/30 via-red-900/20 to-stone-900/30 rounded-3xl blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
+              <div className="absolute -inset-4 bg-gradient-to-tr from-amber-600/15 to-transparent rounded-2xl blur-xl" />
               <img
-                src="/images/hero-portrait.png"
+                src={heroPhoto}
                 alt="Khalil Briki"
-                className="relative w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl"
+                className="relative w-full aspect-[3/4] object-cover object-top rounded-2xl shadow-2xl"
+                style={{ filter: 'contrast(1.05) saturate(1.1)' }}
                 data-testid="img-hero-portrait"
               />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-stone-950/40 via-transparent to-transparent" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-stone-950/70 via-stone-950/10 to-transparent" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-stone-950/40 via-transparent to-stone-950/40" />
+              <div className="absolute inset-0 rounded-2xl mix-blend-overlay bg-gradient-to-br from-amber-500/10 via-transparent to-red-900/10" />
             </div>
           </motion.div>
         </div>
