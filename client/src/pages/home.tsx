@@ -736,6 +736,7 @@ function splitDescription(description: string, count: number): string[] {
 function ProjectPhotoSlider({ photos, title, description }: { photos: { src: string; alt: string }[]; title: string; description: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [paused, setPaused] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const descriptionParts = splitDescription(description, photos.length);
   const slug = title.toLowerCase().replace(/\s+/g, "-");
@@ -750,7 +751,7 @@ function ProjectPhotoSlider({ photos, title, description }: { photos: { src: str
   };
 
   useEffect(() => {
-    if (photos.length <= 1) return;
+    if (photos.length <= 1 || paused) return;
     setProgress(0);
     timerRef.current = setInterval(() => {
       setProgress((prev) => {
@@ -763,11 +764,15 @@ function ProjectPhotoSlider({ photos, title, description }: { photos: { src: str
       });
     }, TICK_MS);
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [currentIndex, photos.length]);
+  }, [currentIndex, photos.length, paused]);
 
   return (
     <div className="max-w-2xl mx-auto" data-testid={`slider-${slug}`}>
-      <div className="relative group/slider rounded-xl overflow-hidden">
+      <div
+        className="relative group/slider rounded-xl overflow-hidden"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
         <div className="relative aspect-[16/10] bg-stone-900">
           {photos.map((photo, i) => (
             <motion.img
