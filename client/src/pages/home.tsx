@@ -61,8 +61,8 @@ const NAV_ITEMS = [
 const PROJECTS = [
   {
     title: "Khalil Briki Octet",
-    role: "Bassist, Composer, Musical Director",
-    description: "An eight-piece ensemble channeling the architectural convergence of Gnawa trance, Arabic-Andalusian modes, and Brazilian harmonic landscapes into a unified sonic architecture.",
+    role: "Composer, Bassist, Musical Director",
+    description: "The Khalil Briki Octet embodies Briki's vision of Afro-descendant instrumental expression, blending ancestral rhythmic traditions with contemporary harmonic and melodic structures. Featuring Khalil Briki (bass), Lucas Godoy (drums), Dudu Amendoeira (piano/keys), Xande Sax (saxophone), Aurelio (trumpet), Micael (trombone), Daniel Faria (guitar), and Ebano Brandao (percussion). A platform where Afro-Brazilian and global musical influences converge through rhythmic dialogue, collective creativity, and harmonic architecture.",
     photos: [
       { src: "/images/project-octet-1.png", alt: "Octet ensemble on stage" },
       { src: "/images/project-octet-2.png", alt: "Upright bass close-up" },
@@ -70,27 +70,83 @@ const PROJECTS = [
     ],
   },
   {
-    title: "Swing Safado",
-    role: "Bassist, Arranger",
-    description: "Where swing meets the irreverence of Brazilian popular culture — a rhythmic dialogue between North American jazz tradition and Northeastern Brazilian groove.",
-    photos: [
-      { src: "/images/project-swing-1.png", alt: "Swing Safado at festival" },
-      { src: "/images/project-swing-2.png", alt: "Intimate bar session" },
-    ],
-  },
-  {
     title: "Igara Silva",
     role: "Bassist, Musical Director",
-    description: "Collaborative artistry rooted in MPB and contemporary Brazilian song, shaping the harmonic foundation beneath poetic lyricism and cultural narrative.",
+    description: "Within Igara Silva's evolving instrumental universe — deeply influenced by the tradition of Minas Gerais instrumental music and contemporary Brazilian composition — Briki's bass became a grounding and structural force. During the creative process of O Piano, os Cavalos e o Mar (2024), Briki contributed to arrangement development, shaping a sound that honored regional identity while expanding harmonic and textural possibilities. The celebrated Paulo Santos (Uakti) and Marcus Ruffato also participated, adding sonic depth to collaborative explorations.",
     photos: [
       { src: "/images/project-igara-1.png", alt: "MPB concert performance" },
       { src: "/images/project-igara-2.png", alt: "Recording studio session" },
     ],
   },
   {
+    title: "Swing Safado",
+    role: "Bassist",
+    description: "Within the Afro-descendant energy of Carnaval de Belo Horizonte, Swing Safado embodies the pulse of street bloco culture rooted in Black Brazilian rhythmic traditions. Featuring Latin Grammy-winning producer Dédé Santaklaus and the charismatic Jeffim da Baze, a vocal advocate of anti-racist engagement. In 2026, Swing Safado toured Minas Gerais, culminating in performances on Avenida dos Andradas before more than 150,000 spectators.",
+    photos: [
+      { src: "/images/project-swing-1.png", alt: "Swing Safado at festival" },
+      { src: "/images/project-swing-2.png", alt: "Intimate bar session" },
+    ],
+  },
+  {
+    title: "Thamires Cunha",
+    role: "Bassist",
+    description: "In the show Raízes, Briki's bass lines carried more than harmony — they carried memory. Supporting Thamires Cunha's Afro-descendant affirmation, her artistic voice rooted in choro, samba, and Black Brazilian cultural memory resonates with strength and historical consciousness. Live performances reveal melodies soaring over bass lines that anchor ancestry, resistance, and celebration.",
+    photos: [
+      { src: "/images/project-thamires-1.png", alt: "Raízes live performance" },
+    ],
+  },
+  {
+    title: "Silas Prado",
+    role: "Bassist",
+    description: "Across instrumental jazz sessions and festival stages, Briki's collaboration with Silas Prado unfolds through attentive interplay deeply informed by Afro-Brazilian rhythmic heritage. Briki participated in the presentation of Silas Prado's album Obrigado Mestre, contributing to live interpretations that highlight improvisational dialogue and compositional richness.",
+    photos: [
+      { src: "/images/project-silas-1.png", alt: "Jazz session with Silas Prado" },
+    ],
+  },
+  {
+    title: "Tatio",
+    role: "Bassist, Guitarist",
+    description: "In groove-driven projects with Tatio, Briki demonstrates versatility beyond the bass, contributing guitar and expanding harmonic textures within contemporary Afro-Brazilian frameworks. He participated in the artist's first album presentation, Contrabandeado, produced by Chico Neves — one of Brazil's most respected music producers. Creative chemistry drives the collaboration, while professional rigor sustains it.",
+    photos: [
+      { src: "/images/project-tatio-1.png", alt: "Tatio groove session" },
+    ],
+  },
+  {
+    title: "Gabriela Viegas",
+    role: "Bassist",
+    description: "Collaborations with Gabriela Viegas explore territories influenced by African traditions and diasporic memory. Rooted in rhythmic matrices echoing West and Central African heritage, her work bridges Brazilian popular music with ancestral narratives. Briki's bass interacts with percussion-driven arrangements and polyrhythmic structures, reinforcing groove while maintaining harmonic clarity.",
+    photos: [
+      { src: "/images/project-gabriela-1.png", alt: "African-influenced performance" },
+    ],
+  },
+  {
+    title: "Daniel Faria",
+    role: "Bassist",
+    description: "In collaboration with Daniel Faria, Briki's bass engages music shaped by Afro-descendant identity and contemporary Black Brazilian expression, drawing on New Soul, New York, and British Hip Hop influences. Their partnership reflects structural clarity aligned with rhythmic matrices echoing samba, funk, diasporic grooves, and global hip-hop sensibilities — honoring lineage while speaking to the present.",
+    photos: [
+      { src: "/images/project-daniel-1.png", alt: "Daniel Faria performance" },
+    ],
+  },
+  {
+    title: "Ciro Belluci",
+    role: "Bassist",
+    description: "Ciro Belluci is a multi-talented musician, composer, and interpreter whose work blends deep musical literacy with expressive performance, reimagining Brazilian classics and original compositions. His collaboration with Briki focuses on structural interplay and creative composition, grounded in Afro-diasporic heritage and contemporary expression.",
+    photos: [
+      { src: "/images/project-ciro-1.png", alt: "Ciro Belluci collaboration" },
+    ],
+  },
+  {
+    title: "Cruvinel",
+    role: "Bassist",
+    description: "Briki performed with Cruvinel in Groove do Cruv projects and a João Bosco tribute at Minas Tênis Clube, contributing bass lines that anchor groove and support melodic interplay within sophisticated Brazilian jazz frameworks.",
+    photos: [
+      { src: "/images/project-cruvinel-1.png", alt: "Cruvinel groove session" },
+    ],
+  },
+  {
     title: "Banda El Said",
-    role: "Bassist, Oud Player, Composer",
-    description: "A bridge between the Maghreb and South America — blending Arabic maqam with Afro-Brazilian percussion into a transnational sonic identity.",
+    role: "Oud Player, Creator",
+    description: "A classical Arabic music group created by Khalil Briki, emphasizing the influence of Arabic music in the Western world. The band plays classical repertoire such as Om Kalthoum, Abdelhalim, and Abdelwaheb in a Brazilian context. Briki plays oud in this ensemble, connecting Arabic musical heritage to Brazilian and global audiences.",
     photos: [
       { src: "/images/project-elsaid-1.png", alt: "Arabic ensemble performance" },
       { src: "/images/project-elsaid-2.png", alt: "Gombri instrument detail" },
@@ -99,7 +155,7 @@ const PROJECTS = [
   {
     title: "Brazilian Jazz Scene",
     role: "Bassist, Collaborator",
-    description: "Active presence across Minas Gerais and São Paulo's vibrant jazz circuits, bringing polyrhythmic depth and cross-cultural fluency to each collaboration.",
+    description: "Active presence across Minas Gerais and São Paulo's vibrant jazz circuits with the Dudu Amendoeira Trio, Lucas Demello Trio, Davi Desmolins Trio, Lucas Godoy Trio, and Carol Serdeira. Performing complex compositions and exploring collective improvisation, providing both harmonic foundation and rhythmic propulsion while emphasizing Afro-descendant influences.",
     photos: [
       { src: "/images/project-jazz-1.png", alt: "Jazz concert in Brazilian venue" },
     ],
@@ -107,22 +163,24 @@ const PROJECTS = [
 ];
 
 const FESTIVALS = [
-  { name: "Savassi Jazz Festival", detail: "Winner — DJ Category", highlight: true },
-  { name: "Prêmio BDMG Instrumental", detail: "Selected Artist" },
-  { name: "BH Instrumental", detail: "Featured Performer" },
-  { name: "SESC Consolação", detail: "São Paulo" },
-  { name: "CCBB", detail: "Centro Cultural Banco do Brasil" },
-  { name: "Festival Fartura", detail: "Cultural Programming" },
-  { name: "Minas Tênis Clube", detail: "Belo Horizonte" },
+  { name: "Savassi Jazz Festival", detail: "Winner — DJ Category, highlighting creative breadth beyond instrumental performance", highlight: true },
+  { name: "Prêmio BDMG Instrumental", detail: "Prestigious instrumental music award, reinforcing presence in Brazil's contemporary music scene" },
+  { name: "BH Instrumental", detail: "Featured performer across intimate and large-scale stages" },
+  { name: "CCBB", detail: "Centro Cultural Banco do Brasil — performing at one of Brazil's most prestigious cultural venues" },
+  { name: "SESC Consolação", detail: "São Paulo — expanding reach across Brazil's cultural capitals" },
+  { name: "Festival Fartura", detail: "Nationally recognized cultural programming and performance" },
+  { name: "Minas Tênis Clube", detail: "Belo Horizonte — including tributes and jazz ensembles" },
+  { name: "Assembleia Legislativa de MG", detail: "Performances promoted by the state legislative assembly of Minas Gerais" },
 ];
 
 const EDUCATION_TOPICS = [
-  { title: "Musicalisation", description: "Building musical awareness from the ground up through embodied rhythm and ancestral listening practices." },
-  { title: "Music Perception", description: "Training the ear to hear across traditions — from Arabic maqam to West African polyrhythm to Brazilian syncopation." },
-  { title: "Bass Technique", description: "Developing architectural presence on the instrument — structural, harmonic, and deeply grooved." },
-  { title: "Improvisation", description: "Freedom within form. Spontaneous composition rooted in deep knowledge of multiple musical languages." },
-  { title: "Afro-descendant Musical Roots", description: "Tracing the sonic genealogies that connect North Africa, West Africa, and the Americas." },
-  { title: "Cultural Literacy", description: "Understanding music as living heritage — the social, spiritual, and political dimensions of sound." },
+  { title: "Musicalisation", description: "Building musical awareness from the ground up through embodied rhythm and ancestral listening practices, impacting hundreds of students across Brazil and internationally." },
+  { title: "Music Perception", description: "Training the ear to hear across traditions — from Arabic maqam to West African polyrhythm to Brazilian syncopation. Emphasizing listening as the foundation of all musicianship." },
+  { title: "Bass Technique", description: "Developing architectural presence on the instrument — structural, harmonic, and deeply grooved. Balancing discipline with creativity to ground learning in solid fundamentals." },
+  { title: "Improvisation", description: "Freedom within form. Spontaneous composition rooted in deep knowledge of multiple musical languages, encouraging students to explore personal expression." },
+  { title: "Ensemble & Composition", description: "Workshops in ensemble playing and composition, fostering collective creativity and structural understanding through collaborative musical dialogue." },
+  { title: "Afro-descendant Musical Roots", description: "Highlighting African and Afro-descendant roots of Brazilian and global music — rhythmic matrices, harmonic architecture, and cross-cultural integration bridging contemporary practice with ancestral knowledge." },
+  { title: "Cultural Literacy", description: "Positioning music not only as craft but as living cultural legacy — connecting communities, generations, and diverse traditions through historical and cultural perspectives." },
 ];
 
 export default function Home() {
@@ -330,10 +388,13 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mt-8">
             <FadeInSection delay={0.2}>
               <p className="text-lg leading-relaxed text-stone-400 mb-6">
-                Khalil Briki is a Northern African bassist, composer, and cultural bridge currently based in Brazil. His music merges jazz improvisation, Gnawa trance rhythms, Arabic-Andalusian melodies, West African polyrhythms, and Brazilian Popular Music (MPB).
+                At the center of diverse artistic intersections stands Khalil Briki, a Northern African native who immigrated to Brazil in 2018, bringing a multicultural, multilingual, and cross-continental perspective to his music. He is fluent in Arabic, Tunisian dialect, French, English, and Portuguese.
               </p>
-              <p className="text-lg leading-relaxed text-stone-400">
-                He plays bass, gombri, and oud, developing an architectural musical presence that shapes ensembles from within — not from the front, but from the foundation.
+              <p className="text-lg leading-relaxed text-stone-400 mb-6">
+                Briki plays bass, Gombri (Northern African acoustic bass), and oud. His music is informed by jazz improvisation, Gnawa trance rhythms, Arabic-Andalusian melodic phrasing, West African polyrhythms, and Brazilian Popular Music (MPB), creating a hybridized sound that bridges continents, genres, and ancestral legacies.
+              </p>
+              <p className="text-stone-500 leading-relaxed italic">
+                His presence is not merely supportive; it is architectural. Across concerts, festivals, and recordings, his harmonic sensibility and structural awareness help define the identity of each collaboration.
               </p>
             </FadeInSection>
 
@@ -345,7 +406,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-serif text-stone-200 text-lg mb-1">Multilingual</h3>
-                    <p className="text-stone-500 text-sm">Arabic, French, English, Portuguese — four languages, countless musical dialects.</p>
+                    <p className="text-stone-500 text-sm">Arabic, Tunisian dialect, French, English, Portuguese — five languages bridging countless musical dialects and cultural traditions.</p>
                   </div>
                 </div>
 
@@ -355,7 +416,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-serif text-stone-200 text-lg mb-1">Tunisia to Brazil</h3>
-                    <p className="text-stone-500 text-sm">Immigrated in 2018, carrying North African sonic memory into the rhythmic heartland of South America.</p>
+                    <p className="text-stone-500 text-sm">Trained at Ariana Public Conservatory and Jazz Club de Tunis, then immersed at Bituca — Universidade de Música Popular under masters Enéias Xavier, Aloízio Horta, and Pitágoras Silveira.</p>
                   </div>
                 </div>
 
@@ -364,8 +425,8 @@ export default function Home() {
                     <Music className="w-4 h-4 text-amber-500/70" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-stone-200 text-lg mb-1">Architectural Presence</h3>
-                    <p className="text-stone-500 text-sm">Structural and harmonic awareness — building the sonic foundation that allows ensembles to breathe and evolve.</p>
+                    <h3 className="font-serif text-stone-200 text-lg mb-1">Philosophy</h3>
+                    <p className="text-stone-500 text-sm">Friendship fuels creativity. Professionalism sustains it. Music built on mutual respect, shared vision, and collective growth.</p>
                   </div>
                 </div>
               </div>
@@ -422,6 +483,9 @@ export default function Home() {
           <FadeInSection>
             <SectionLabel>Festivals & Events</SectionLabel>
             <SectionTitle>Cultural Presence</SectionTitle>
+            <p className="text-stone-500 max-w-2xl text-base leading-relaxed">
+              Briki's artistic path unfolds across a wide range of important Brazilian cultural platforms, demonstrating versatility and commitment to community and Afro-descendant musical traditions. Across each platform, artistic excellence is sustained by human connection — where performance, cultural dialogue, and community engagement intersect.
+            </p>
           </FadeInSection>
 
           <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -458,8 +522,11 @@ export default function Home() {
           <FadeInSection>
             <SectionLabel>Education & Mentorship</SectionLabel>
             <SectionTitle>Music as Living Heritage</SectionTitle>
-            <p className="text-stone-500 max-w-2xl text-lg leading-relaxed mb-12">
-              Teaching is not transmission — it is dialogue. Each student carries ancestral rhythms waiting to be awakened. The work is to listen first, then guide.
+            <p className="text-stone-500 max-w-2xl text-lg leading-relaxed mb-4">
+              Beyond performance, Khalil Briki is deeply committed to musical education and the preservation of cultural heritage. Through workshops, private lessons, and ensemble coaching, he ensures the richness of Afro-descendant and global musical heritage is passed on, celebrated, and sustained.
+            </p>
+            <p className="text-stone-600 max-w-2xl text-base leading-relaxed mb-12 italic">
+              His teaching balances discipline with creativity, encouraging students to explore personal expression while grounding their learning in solid musical fundamentals.
             </p>
           </FadeInSection>
 
