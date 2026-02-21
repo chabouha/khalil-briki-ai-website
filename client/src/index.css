@@ -182,6 +182,10 @@
     background-color: rgba(180, 120, 60, 0.3);
     color: inherit;
   }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /**

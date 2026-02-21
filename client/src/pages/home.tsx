@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import {
   Music,
   FileText,
@@ -62,26 +63,46 @@ const PROJECTS = [
     title: "Khalil Briki Octet",
     role: "Bassist, Composer, Musical Director",
     description: "An eight-piece ensemble channeling the architectural convergence of Gnawa trance, Arabic-Andalusian modes, and Brazilian harmonic landscapes into a unified sonic architecture.",
+    photos: [
+      { src: "/images/project-octet-1.png", alt: "Octet ensemble on stage" },
+      { src: "/images/project-octet-2.png", alt: "Upright bass close-up" },
+      { src: "/images/project-octet-3.png", alt: "Rehearsal studio session" },
+    ],
   },
   {
     title: "Swing Safado",
     role: "Bassist, Arranger",
     description: "Where swing meets the irreverence of Brazilian popular culture — a rhythmic dialogue between North American jazz tradition and Northeastern Brazilian groove.",
+    photos: [
+      { src: "/images/project-swing-1.png", alt: "Swing Safado at festival" },
+      { src: "/images/project-swing-2.png", alt: "Intimate bar session" },
+    ],
   },
   {
     title: "Igara Silva",
     role: "Bassist, Musical Director",
     description: "Collaborative artistry rooted in MPB and contemporary Brazilian song, shaping the harmonic foundation beneath poetic lyricism and cultural narrative.",
+    photos: [
+      { src: "/images/project-igara-1.png", alt: "MPB concert performance" },
+      { src: "/images/project-igara-2.png", alt: "Recording studio session" },
+    ],
   },
   {
     title: "Banda El Said",
     role: "Bassist, Oud Player, Composer",
     description: "A bridge between the Maghreb and South America — blending Arabic maqam with Afro-Brazilian percussion into a transnational sonic identity.",
+    photos: [
+      { src: "/images/project-elsaid-1.png", alt: "Arabic ensemble performance" },
+      { src: "/images/project-elsaid-2.png", alt: "Gombri instrument detail" },
+    ],
   },
   {
     title: "Brazilian Jazz Scene",
     role: "Bassist, Collaborator",
     description: "Active presence across Minas Gerais and São Paulo's vibrant jazz circuits, bringing polyrhythmic depth and cross-cultural fluency to each collaboration.",
+    photos: [
+      { src: "/images/project-jazz-1.png", alt: "Jazz concert in Brazilian venue" },
+    ],
   },
 ];
 
@@ -363,31 +384,35 @@ export default function Home() {
             <SectionTitle>Collaborations</SectionTitle>
           </FadeInSection>
 
-          <div className="mt-12 space-y-6">
-            {PROJECTS.map((project, i) => (
-              <FadeInSection key={project.title} delay={i * 0.1}>
-                <div
-                  className="group relative border border-stone-800/50 rounded-xl p-6 md:p-8 transition-all duration-500 hover:border-amber-800/30 hover:bg-stone-900/50"
+          <FadeInSection delay={0.15}>
+            <Accordion type="single" collapsible className="mt-12">
+              {PROJECTS.map((project, i) => (
+                <AccordionItem
+                  key={project.title}
+                  value={project.title}
+                  className="border-stone-800/40 data-[state=open]:border-amber-800/30"
                   data-testid={`card-project-${i}`}
                 >
-                  <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-8">
-                    <div className="flex-shrink-0">
-                      <h3 className="font-serif text-xl md:text-2xl text-stone-100 group-hover:text-amber-400/90 transition-colors duration-500">
+                  <AccordionTrigger className="py-6 md:py-8 hover:no-underline group">
+                    <div className="flex flex-col items-start text-left gap-1 pr-4">
+                      <h3 className="font-serif text-xl md:text-2xl text-stone-100 group-hover:text-amber-400/90 transition-colors duration-300">
                         {project.title}
                       </h3>
-                      <span className="font-mono text-xs tracking-wider text-amber-600/60 uppercase mt-1 block">
+                      <span className="font-mono text-xs tracking-wider text-amber-600/60 uppercase">
                         {project.role}
                       </span>
                     </div>
-                    <p className="text-stone-500 leading-relaxed md:ml-auto md:max-w-md md:text-right">
+                  </AccordionTrigger>
+                  <AccordionContent className="pb-8">
+                    <p className="text-stone-400 leading-relaxed mb-6 max-w-2xl">
                       {project.description}
                     </p>
-                  </div>
-                  <div className="absolute top-0 left-0 w-0 h-full bg-gradient-to-r from-amber-700/5 to-transparent rounded-xl transition-all duration-700 group-hover:w-full" />
-                </div>
-              </FadeInSection>
-            ))}
-          </div>
+                    <ProjectPhotoScroll photos={project.photos} title={project.title} />
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </FadeInSection>
         </div>
       </section>
 
@@ -588,6 +613,94 @@ export default function Home() {
 
       {/* Ambient sand particle effect */}
       <SandParticles />
+    </div>
+  );
+}
+
+function ProjectPhotoScroll({ photos, title }: { photos: { src: string; alt: string }[]; title: string }) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const checkScroll = () => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 4);
+    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 4);
+  };
+
+  useEffect(() => {
+    checkScroll();
+    const el = scrollContainerRef.current;
+    if (el) {
+      el.addEventListener("scroll", checkScroll, { passive: true });
+      window.addEventListener("resize", checkScroll);
+    }
+    return () => {
+      el?.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
+
+  const scroll = (direction: "left" | "right") => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+    const scrollAmount = el.clientWidth * 0.75;
+    el.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative group/scroll">
+      {canScrollLeft && (
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-stone-900/80 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/scroll:opacity-100"
+          aria-label="Scroll left"
+          data-testid={`scroll-left-${title.toLowerCase().replace(/\s+/g, "-")}`}
+        >
+          <ChevronDown className="w-4 h-4 -rotate-90" />
+        </button>
+      )}
+
+      <div
+        ref={scrollContainerRef}
+        className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {photos.map((photo, i) => (
+          <div
+            key={i}
+            className="flex-shrink-0 snap-start w-[280px] sm:w-[340px] md:w-[400px] aspect-[4/3] rounded-xl overflow-hidden relative group/photo"
+          >
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover/photo:scale-105"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent opacity-0 group-hover/photo:opacity-100 transition-opacity duration-300" />
+          </div>
+        ))}
+      </div>
+
+      {canScrollRight && (
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-stone-900/80 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/scroll:opacity-100"
+          aria-label="Scroll right"
+          data-testid={`scroll-right-${title.toLowerCase().replace(/\s+/g, "-")}`}
+        >
+          <ChevronDown className="w-4 h-4 rotate-90" />
+        </button>
+      )}
+
+      {photos.length > 1 && (
+        <div className="flex justify-center gap-1.5 mt-3">
+          {photos.map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-stone-700" />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
