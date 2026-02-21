@@ -735,14 +735,35 @@ function splitDescription(description: string, count: number): string[] {
 
 function ProjectPhotoSlider({ photos, title, description }: { photos: { src: string; alt: string }[]; title: string; description: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const descriptionParts = splitDescription(description, photos.length);
   const slug = title.toLowerCase().replace(/\s+/g, "-");
+  const AUTO_ADVANCE_MS = 5000;
+  const TICK_MS = 30;
 
   const goTo = (index: number) => {
+    setProgress(0);
     if (index < 0) setCurrentIndex(photos.length - 1);
     else if (index >= photos.length) setCurrentIndex(0);
     else setCurrentIndex(index);
   };
+
+  useEffect(() => {
+    if (photos.length <= 1) return;
+    setProgress(0);
+    timerRef.current = setInterval(() => {
+      setProgress((prev) => {
+        const next = prev + (TICK_MS / AUTO_ADVANCE_MS) * 100;
+        if (next >= 100) {
+          setCurrentIndex((ci) => (ci + 1) % photos.length);
+          return 0;
+        }
+        return next;
+      });
+    }, TICK_MS);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [currentIndex, photos.length]);
 
   return (
     <div className="max-w-2xl mx-auto" data-testid={`slider-${slug}`}>
@@ -765,13 +786,19 @@ function ProjectPhotoSlider({ photos, title, description }: { photos: { src: str
 
         {photos.length > 1 && (
           <>
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-stone-800/60 z-10">
+              <div
+                className="h-full bg-amber-500/80 transition-none"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
             <button
               onClick={() => goTo(currentIndex - 1)}
               className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
               aria-label="Previous photo"
               data-testid={`slider-prev-${slug}`}
             >
-              <ChevronDown className="w-4 h-4 -rotate-90" />
+              <ChevronDown className="w-4 h-4 rotate-90" />
             </button>
             <button
               onClick={() => goTo(currentIndex + 1)}
@@ -779,7 +806,7 @@ function ProjectPhotoSlider({ photos, title, description }: { photos: { src: str
               aria-label="Next photo"
               data-testid={`slider-next-${slug}`}
             >
-              <ChevronDown className="w-4 h-4 rotate-90" />
+              <ChevronDown className="w-4 h-4 -rotate-90" />
             </button>
           </>
         )}
@@ -802,7 +829,7 @@ function ProjectPhotoSlider({ photos, title, description }: { photos: { src: str
           {photos.map((_, i) => (
             <button
               key={i}
-              onClick={() => setCurrentIndex(i)}
+              onClick={() => goTo(i)}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === currentIndex ? "bg-amber-500 w-6" : "bg-stone-700 w-1.5 hover:bg-stone-500"
               }`}
