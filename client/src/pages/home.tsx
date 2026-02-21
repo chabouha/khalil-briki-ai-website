@@ -16,6 +16,23 @@ import {
 } from "lucide-react";
 import { SiSpotify, SiYoutube, SiInstagram, SiWhatsapp } from "react-icons/si";
 
+import igara1 from "@assets/Igara_(1)_1771707549349.jpg";
+import igara2 from "@assets/Igara_(2)_1771707549349.jpg";
+import igara5 from "@assets/Igara_(5)_1771707549349.jpg";
+import igaraBdmg123 from "@assets/20230906_Igara_BDMG_Foto-DanielaPaoliello-alta-123_1771707549352.jpg";
+import igaraBdmg89 from "@assets/20230906_Igara_BDMG_Foto-DanielaPaoliello-alta-89_1771707549353.jpg";
+import igaraBdmg60 from "@assets/20230906_Igara_BDMG_Foto-DanielaPaoliello-alta-60_1771707549353.jpg";
+import swingSafado10 from "@assets/BLOCO_SWING_SAFADO_-_2026-10_1771707549352.jpg";
+import swingSafado7 from "@assets/BLOCO_SWING_SAFADO_-_2026-7_1771707549352.jpg";
+import silas2 from "@assets/Silas_(2)_1771707549348.jpg";
+import silas4 from "@assets/Silas_(4)_1771707549353.jpg";
+import dani1 from "@assets/Dani_(1)_1771707549350.jpg";
+import dani2 from "@assets/Dani_(2)_1771707549350.jpg";
+import dani3 from "@assets/Dani_(3)_1771707549350.jpg";
+import ciro1 from "@assets/Ciro_(1)_1771707549351.jpg";
+import ciro2 from "@assets/Ciro_(2)_1771707549351.jpg";
+import ciro3 from "@assets/Ciro_(3)_1771707549351.jpg";
+
 function FadeInSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
@@ -74,8 +91,12 @@ const PROJECTS = [
     role: "Bassist, Musical Director",
     description: "Within Igara Silva's evolving instrumental universe — deeply influenced by the tradition of Minas Gerais instrumental music and contemporary Brazilian composition — Briki's bass became a grounding and structural force. During the creative process of O Piano, os Cavalos e o Mar (2024), Briki contributed to arrangement development, shaping a sound that honored regional identity while expanding harmonic and textural possibilities. The celebrated Paulo Santos (Uakti) and Marcus Ruffato also participated, adding sonic depth to collaborative explorations.",
     photos: [
-      { src: "/images/project-igara-1.png", alt: "MPB concert performance" },
-      { src: "/images/project-igara-2.png", alt: "Recording studio session" },
+      { src: igara1, alt: "Khalil Briki playing bass on stage with Igara Silva" },
+      { src: igara5, alt: "Igara Silva and Briki performing live" },
+      { src: igara2, alt: "Ensemble performing with Igara Silva" },
+      { src: igaraBdmg123, alt: "Briki playing oud at BDMG Instrumental" },
+      { src: igaraBdmg89, alt: "Clarinetist performing with Briki at BDMG" },
+      { src: igaraBdmg60, alt: "Briki playing bass at BDMG Instrumental" },
     ],
   },
   {
@@ -83,8 +104,8 @@ const PROJECTS = [
     role: "Bassist",
     description: "Within the Afro-descendant energy of Carnaval de Belo Horizonte, Swing Safado embodies the pulse of street bloco culture rooted in Black Brazilian rhythmic traditions. Featuring Latin Grammy-winning producer Dédé Santaklaus and the charismatic Jeffim da Baze, a vocal advocate of anti-racist engagement. In 2026, Swing Safado toured Minas Gerais, culminating in performances on Avenida dos Andradas before more than 150,000 spectators.",
     photos: [
-      { src: "/images/project-swing-1.png", alt: "Swing Safado at festival" },
-      { src: "/images/project-swing-2.png", alt: "Intimate bar session" },
+      { src: swingSafado10, alt: "Swing Safado bloco group photo at Carnaval" },
+      { src: swingSafado7, alt: "Swing Safado members celebrating at Carnaval" },
     ],
   },
   {
@@ -100,7 +121,8 @@ const PROJECTS = [
     role: "Bassist",
     description: "Across instrumental jazz sessions and festival stages, Briki's collaboration with Silas Prado unfolds through attentive interplay deeply informed by Afro-Brazilian rhythmic heritage. Briki participated in the presentation of Silas Prado's album Obrigado Mestre, contributing to live interpretations that highlight improvisational dialogue and compositional richness.",
     photos: [
-      { src: "/images/project-silas-1.png", alt: "Jazz session with Silas Prado" },
+      { src: silas2, alt: "Silas Prado performing with saxophone" },
+      { src: silas4, alt: "Briki playing bass with Silas Prado" },
     ],
   },
   {
@@ -124,7 +146,9 @@ const PROJECTS = [
     role: "Bassist",
     description: "In collaboration with Daniel Faria, Briki's bass engages music shaped by Afro-descendant identity and contemporary Black Brazilian expression, drawing on New Soul, New York, and British Hip Hop influences. Their partnership reflects structural clarity aligned with rhythmic matrices echoing samba, funk, diasporic grooves, and global hip-hop sensibilities — honoring lineage while speaking to the present.",
     photos: [
-      { src: "/images/project-daniel-1.png", alt: "Daniel Faria performance" },
+      { src: dani1, alt: "Briki playing bass with Daniel Faria" },
+      { src: dani2, alt: "Daniel Faria performing guitar with Briki" },
+      { src: dani3, alt: "Full band performing with Daniel Faria" },
     ],
   },
   {
@@ -132,7 +156,9 @@ const PROJECTS = [
     role: "Bassist",
     description: "Ciro Belluci is a multi-talented musician, composer, and interpreter whose work blends deep musical literacy with expressive performance, reimagining Brazilian classics and original compositions. His collaboration with Briki focuses on structural interplay and creative composition, grounded in Afro-diasporic heritage and contemporary expression.",
     photos: [
-      { src: "/images/project-ciro-1.png", alt: "Ciro Belluci collaboration" },
+      { src: ciro1, alt: "Ciro Belluci performing with guitar" },
+      { src: ciro2, alt: "Ciro Belluci at the piano" },
+      { src: ciro3, alt: "Musicians performing with Ciro Belluci" },
     ],
   },
   {
