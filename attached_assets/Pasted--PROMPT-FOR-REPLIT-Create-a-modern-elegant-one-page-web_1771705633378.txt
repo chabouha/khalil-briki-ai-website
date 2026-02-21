@@ -1,0 +1,216 @@
+✅ PROMPT FOR REPLIT
+
+Create a modern, elegant one-page website for Khalil Briki, an Afro-diasporic bassist, composer, and musical director based in Brazil, originally from Tunisia.
+
+🎨 Aesthetic Direction
+
+Design vibe:
+
+Earth palette (sand, clay, terracotta, deep brown, olive green, muted gold, charcoal)
+
+Afro-futuristic aesthetics
+
+Minimal but powerful
+
+Organic textures (subtle grain, sand gradients, soft shadows)
+
+Modern typography with strong presence
+
+Cinematic and architectural layout
+
+Smooth scrolling and subtle motion animations
+
+Artistic and cultural — not corporate
+
+The website must feel:
+Ancestral + Contemporary
+Afro-diasporic + Global
+Architectural + Musical
+Spiritual + Professional
+
+🧱 Website Structure (One Pager)
+1️⃣ HERO SECTION
+
+Full screen.
+
+Large artistic portrait placeholder
+
+Name: Khalil Briki
+
+Subtitle: Bassist • Composer • Musical Director
+
+Short poetic tagline:
+
+"Architect of Afro-diasporic sound.
+Bridging Tunisia, Brazil, and the Global South through bass."
+
+CTA buttons:
+
+Listen
+
+Press Kit
+
+Contact
+
+Background: earth tone gradient with subtle Afro-futuristic abstract pattern (geometric + organic fusion).
+
+2️⃣ ARTISTIC PROFILE
+
+Short but powerful bio adapted from the press kit:
+
+Khalil Briki is a Northern African bassist, composer, and cultural bridge currently based in Brazil. His music merges jazz improvisation, Gnawa trance rhythms, Arabic-Andalusian melodies, West African polyrhythms, and Brazilian Popular Music (MPB).
+
+He plays bass, gombri, and oud, developing an architectural musical presence that shapes ensembles from within.
+
+Include key themes:
+
+Multicultural and multilingual (Arabic, French, English, Portuguese)
+
+Immigration from Tunisia to Brazil (2018)
+
+Balance between friendship and professionalism
+
+Structural and harmonic awareness
+
+Keep it refined and visually breathable (not dense text).
+
+3️⃣ SELECTED PROJECTS / COLLABORATIONS
+
+Create elegant horizontal cards or sections for:
+
+Khalil Briki Octet
+
+Swing Safado
+
+Igara Silva
+
+Banda El Said
+
+Brazilian Jazz Scene Gigs
+
+Each should have:
+
+Short artistic description
+
+Role (bassist, composer, musical director, oud player)
+
+Emphasis on Afro-diasporic roots and architectural bass presence
+
+Make it feel curated, not like a long list.
+
+4️⃣ FESTIVALS & MAJOR EVENTS
+
+Highlight:
+
+Savassi Jazz Festival (Winner – DJ Category)
+
+Minas Tênis Clube
+
+BH Instrumental
+
+Festival Fartura
+
+CCBB
+
+SESC Consolação
+
+Prêmio BDMG Instrumental
+
+Design as:
+Minimal timeline or elegant grid.
+
+Tone: cultural presence, not bragging.
+
+5️⃣ EDUCATION & MENTORSHIP
+
+Short section highlighting:
+
+Musicalisation
+
+Music perception
+
+Bass technique
+
+Improvisation
+
+Afro-descendant musical roots
+
+Cultural literacy
+
+Message tone:
+Music as living heritage.
+
+6️⃣ MEDIA SECTION
+
+Embed placeholders for:
+
+YouTube videos
+
+Spotify
+
+Press photos
+
+Downloadable press kit PDF
+
+Minimal and clean.
+
+7️⃣ CONTACT SECTION
+
+Simple and elegant:
+
+Email
+
+Instagram
+
+WhatsApp (optional)
+
+Booking inquiries
+
+🧑‍💻 Technical Requirements
+
+Responsive (mobile first)
+
+Smooth scroll
+
+Subtle fade-in animations
+
+Sticky minimalist navigation
+
+Dark earth theme default
+
+Elegant serif for headings + clean sans-serif for body
+
+No bright colors
+
+No generic templates
+
+Custom CSS styling
+
+Modern layout (Flexbox or Grid)
+
+Optional:
+Add subtle ambient background animation inspired by desert wind or sand movement.
+
+🧠 Tone of Content
+
+The writing must feel:
+
+Poetic but grounded
+
+Cultural but not exoticized
+
+Sophisticated
+
+International
+
+Intellectually strong
+
+Musically deep
+
+Avoid:
+
+Marketing clichés
+
+Overly commercial language
+
+Generic musician website feel
