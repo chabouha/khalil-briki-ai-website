@@ -239,7 +239,9 @@ export default function Home() {
   const scrollToSection = (href: string) => {
     const el = document.getElementById(href.slice(1));
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      const offset = 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
     }
   };
 
@@ -496,16 +498,7 @@ export default function Home() {
                     </div>
                   </AccordionTrigger>
                   <AccordionContent className="pb-8">
-                    <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-                      <div className="md:w-1/2 flex-shrink-0">
-                        <p className="text-stone-400 leading-relaxed">
-                          {project.description}
-                        </p>
-                      </div>
-                      <div className="md:w-1/2 flex-shrink-0">
-                        <ProjectPhotoSlider photos={project.photos} title={project.title} />
-                      </div>
-                    </div>
+                    <ProjectPhotoSlider photos={project.photos} title={project.title} description={project.description} />
                   </AccordionContent>
                 </AccordionItem>
               ))}
@@ -721,8 +714,29 @@ export default function Home() {
   );
 }
 
-function ProjectPhotoSlider({ photos, title }: { photos: { src: string; alt: string }[]; title: string }) {
+function splitDescription(description: string, count: number): string[] {
+  if (count <= 1) return [description];
+  const sentences = description.match(/[^.!?]+[.!?]+/g) || [description];
+  if (sentences.length <= count) {
+    const result: string[] = [];
+    for (let i = 0; i < count; i++) {
+      result.push(sentences[i] ? sentences[i].trim() : "");
+    }
+    return result;
+  }
+  const perChunk = Math.ceil(sentences.length / count);
+  const result: string[] = [];
+  for (let i = 0; i < count; i++) {
+    const chunk = sentences.slice(i * perChunk, (i + 1) * perChunk).join(" ").trim();
+    result.push(chunk);
+  }
+  return result;
+}
+
+function ProjectPhotoSlider({ photos, title, description }: { photos: { src: string; alt: string }[]; title: string; description: string }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const descriptionParts = splitDescription(description, photos.length);
+  const slug = title.toLowerCase().replace(/\s+/g, "-");
 
   const goTo = (index: number) => {
     if (index < 0) setCurrentIndex(photos.length - 1);
@@ -731,54 +745,71 @@ function ProjectPhotoSlider({ photos, title }: { photos: { src: string; alt: str
   };
 
   return (
-    <div className="relative group/slider rounded-xl overflow-hidden" data-testid={`slider-${title.toLowerCase().replace(/\s+/g, "-")}`}>
-      <div className="relative aspect-[4/3] bg-stone-900">
-        {photos.map((photo, i) => (
-          <motion.img
-            key={i}
-            src={photo.src}
-            alt={photo.alt}
-            className="absolute inset-0 w-full h-full object-cover"
-            initial={false}
-            animate={{ opacity: i === currentIndex ? 1 : 0 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            loading="lazy"
-          />
-        ))}
-        <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-transparent" />
+    <div className="max-w-2xl mx-auto" data-testid={`slider-${slug}`}>
+      <div className="relative group/slider rounded-xl overflow-hidden">
+        <div className="relative aspect-[16/10] bg-stone-900">
+          {photos.map((photo, i) => (
+            <motion.img
+              key={i}
+              src={photo.src}
+              alt={photo.alt}
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={false}
+              animate={{ opacity: i === currentIndex ? 1 : 0 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              loading="lazy"
+            />
+          ))}
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent" />
+        </div>
+
+        {photos.length > 1 && (
+          <>
+            <button
+              onClick={() => goTo(currentIndex - 1)}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
+              aria-label="Previous photo"
+              data-testid={`slider-prev-${slug}`}
+            >
+              <ChevronDown className="w-4 h-4 -rotate-90" />
+            </button>
+            <button
+              onClick={() => goTo(currentIndex + 1)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
+              aria-label="Next photo"
+              data-testid={`slider-next-${slug}`}
+            >
+              <ChevronDown className="w-4 h-4 rotate-90" />
+            </button>
+          </>
+        )}
+      </div>
+
+      <div className="mt-4 min-h-[3rem]">
+        <motion.p
+          key={currentIndex}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="text-stone-400 leading-relaxed text-sm md:text-base"
+        >
+          {descriptionParts[currentIndex]}
+        </motion.p>
       </div>
 
       {photos.length > 1 && (
-        <>
-          <button
-            onClick={() => goTo(currentIndex - 1)}
-            className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
-            aria-label="Previous photo"
-            data-testid={`slider-prev-${title.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            <ChevronDown className="w-4 h-4 -rotate-90" />
-          </button>
-          <button
-            onClick={() => goTo(currentIndex + 1)}
-            className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
-            aria-label="Next photo"
-            data-testid={`slider-next-${title.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            <ChevronDown className="w-4 h-4 rotate-90" />
-          </button>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-            {photos.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  i === currentIndex ? "bg-amber-500 w-4" : "bg-stone-500/60 hover:bg-stone-400/80"
-                }`}
-                aria-label={`Go to photo ${i + 1}`}
-              />
-            ))}
-          </div>
-        </>
+        <div className="flex justify-center gap-2 mt-4">
+          {photos.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === currentIndex ? "bg-amber-500 w-6" : "bg-stone-700 w-1.5 hover:bg-stone-500"
+              }`}
+              aria-label={`Go to photo ${i + 1}`}
+            />
+          ))}
+        </div>
       )}
     </div>
   );
