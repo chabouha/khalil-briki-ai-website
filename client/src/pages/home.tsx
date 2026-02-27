@@ -276,7 +276,7 @@ function ProjectScrollSection({ project, index }: { project: typeof PROJECTS[num
 
       {hasMultiplePhotos ? (
         <>
-          <div className="absolute inset-0 bg-gradient-to-b from-stone-950/90 via-stone-950/30 to-stone-950/60 pointer-events-none z-[5]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--background))]/90 via-[hsl(var(--background))]/30 to-[hsl(var(--background))]/60 pointer-events-none z-[5]" />
           <div
             ref={trackRef}
             className="flex items-end h-full gap-4 md:gap-6 will-change-transform px-6 pb-8"
@@ -293,7 +293,7 @@ function ProjectScrollSection({ project, index }: { project: typeof PROJECTS[num
                   className="w-full h-full object-cover"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))]/50 via-transparent to-transparent" />
               </div>
             ))}
           </div>
@@ -307,7 +307,7 @@ function ProjectScrollSection({ project, index }: { project: typeof PROJECTS[num
               className="w-full h-full object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/40 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--background))]/40 via-transparent to-transparent" />
           </div>
         </div>
       )}
@@ -351,17 +351,17 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-stone-950 text-stone-300 min-h-screen overflow-x-hidden">
+    <div className="bg-background text-stone-300 min-h-screen overflow-x-hidden">
       {/* Navigation */}
       {/* Skip to content link for accessibility */}
-      <a href="#profile" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-stone-900 focus:text-amber-400">
+      <a href="#profile" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-card focus:text-[hsl(var(--textile-ochre))]">
         Skip to content
       </a>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: navVisible ? 0 : -100 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-stone-950/85 border-b border-[hsl(var(--textile-ochre)/0.15)]"
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/85 border-b border-[hsl(var(--textile-ochre)/0.15)]"
         data-testid="nav-bar"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
@@ -404,7 +404,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden" data-testid="section-hero">
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-stone-950 via-[hsl(var(--textile-indigo)/0.3)] to-[hsl(var(--textile-red-deep)/0.2)]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-[hsl(var(--textile-indigo)/0.3)] to-[hsl(var(--textile-red-deep)/0.2)]" />
           <div
             className="absolute inset-0 opacity-[0.07]"
             style={{
@@ -426,7 +426,7 @@ export default function Home() {
               WebkitMaskImage: "linear-gradient(to left, black, transparent)",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
         </motion.div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen">
@@ -505,8 +505,8 @@ export default function Home() {
                 style={{ filter: 'contrast(1.05) saturate(1.1)' }}
                 data-testid="img-hero-portrait"
               />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-stone-950/70 via-stone-950/10 to-transparent" />
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-stone-950/40 via-transparent to-stone-950/40" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-[hsl(var(--background))]/70 via-[hsl(var(--background))]/10 to-transparent" />
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[hsl(var(--background))]/40 via-transparent to-[hsl(var(--background))]/40" />
               <div className="absolute inset-0 rounded-2xl mix-blend-overlay bg-gradient-to-br from-[hsl(var(--textile-ochre)/0.1)] via-transparent to-[hsl(var(--textile-red)/0.1)]" />
             </div>
           </motion.div>
@@ -672,7 +672,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {EDUCATION_TOPICS.map((topic, i) => (
               <FadeInSection key={topic.title} delay={i * 0.08}>
-                <div className="p-6 rounded-xl border border-[hsl(var(--textile-indigo)/0.2)] hover:border-[hsl(var(--textile-ochre)/0.3)] transition-all duration-300 bg-stone-950/30" data-testid={`card-education-${i}`}>
+                <div className="p-6 rounded-xl border border-[hsl(var(--textile-indigo)/0.2)] hover:border-[hsl(var(--textile-ochre)/0.3)] transition-all duration-300 bg-background/40" data-testid={`card-education-${i}`}>
                   <div className="w-8 h-8 rounded-full bg-[hsl(var(--textile-ochre)/0.12)] border border-[hsl(var(--textile-ochre)/0.2)] flex items-center justify-center mb-4">
                     <GraduationCap className="w-3.5 h-3.5 text-[hsl(var(--textile-ochre)/0.7)]" />
                   </div>
@@ -695,7 +695,7 @@ export default function Home() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
             <FadeInSection delay={0.1}>
-              <a href="#" aria-label="YouTube channel" className="relative aspect-video rounded-xl border border-stone-800/50 bg-stone-900/50 flex flex-col items-center justify-center gap-4 group hover:border-[hsl(var(--textile-red)/0.4)] transition-colors duration-300 cursor-pointer" data-testid="media-youtube">
+              <a href="#" aria-label="YouTube channel" className="relative aspect-video rounded-xl border border-stone-800/50 bg-background/50 flex flex-col items-center justify-center gap-4 group hover:border-[hsl(var(--textile-red)/0.4)] transition-colors duration-300 cursor-pointer" data-testid="media-youtube">
                 <div className="w-16 h-16 rounded-full bg-[hsl(var(--textile-red)/0.12)] border border-[hsl(var(--textile-red)/0.25)] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <SiYoutube className="w-7 h-7 text-[hsl(var(--textile-red))]" />
                 </div>
@@ -705,7 +705,7 @@ export default function Home() {
             </FadeInSection>
 
             <FadeInSection delay={0.2}>
-              <a href="#" aria-label="Spotify profile" className="relative aspect-video rounded-xl border border-stone-800/50 bg-stone-900/50 flex flex-col items-center justify-center gap-4 group hover:border-[hsl(var(--textile-teal)/0.4)] transition-colors duration-300 cursor-pointer" data-testid="media-spotify">
+              <a href="#" aria-label="Spotify profile" className="relative aspect-video rounded-xl border border-stone-800/50 bg-background/50 flex flex-col items-center justify-center gap-4 group hover:border-[hsl(var(--textile-teal)/0.4)] transition-colors duration-300 cursor-pointer" data-testid="media-spotify">
                 <div className="w-16 h-16 rounded-full bg-[hsl(var(--textile-teal)/0.12)] border border-[hsl(var(--textile-teal)/0.25)] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <SiSpotify className="w-7 h-7 text-[hsl(var(--textile-teal))]" />
                 </div>
@@ -771,7 +771,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <a
                 href="mailto:contact@khalilbriki.com"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-ochre)/0.2)] hover:border-[hsl(var(--textile-ochre)/0.4)] transition-all duration-300 w-full sm:w-auto bg-stone-950/40"
+                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-ochre)/0.2)] hover:border-[hsl(var(--textile-ochre)/0.4)] transition-all duration-300 w-full sm:w-auto bg-background/40"
                 data-testid="contact-email"
               >
                 <Mail className="w-5 h-5 text-[hsl(var(--textile-ochre)/0.8)]" />
@@ -785,7 +785,7 @@ export default function Home() {
                 href="https://instagram.com/khalilbriki"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-red)/0.2)] hover:border-[hsl(var(--textile-red)/0.4)] transition-all duration-300 w-full sm:w-auto bg-stone-950/40"
+                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-red)/0.2)] hover:border-[hsl(var(--textile-red)/0.4)] transition-all duration-300 w-full sm:w-auto bg-background/40"
                 data-testid="contact-instagram"
               >
                 <SiInstagram className="w-5 h-5 text-[hsl(var(--textile-red)/0.8)]" />
@@ -799,7 +799,7 @@ export default function Home() {
                 href="https://wa.me/5500000000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-teal)/0.2)] hover:border-[hsl(var(--textile-teal)/0.4)] transition-all duration-300 w-full sm:w-auto bg-stone-950/40"
+                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-teal)/0.2)] hover:border-[hsl(var(--textile-teal)/0.4)] transition-all duration-300 w-full sm:w-auto bg-background/40"
                 data-testid="contact-whatsapp"
               >
                 <SiWhatsapp className="w-5 h-5 text-[hsl(var(--textile-teal)/0.8)]" />
