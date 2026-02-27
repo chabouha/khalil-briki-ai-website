@@ -3,7 +3,6 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import {
   Music,
   FileText,
@@ -214,100 +213,97 @@ const EDUCATION_TOPICS = [
 
 gsap.registerPlugin(ScrollTrigger);
 
-const GALLERY_ROW_1 = [
-  { src: igara1, alt: "Khalil Briki with Igara Silva" },
-  { src: swingSafado10, alt: "Swing Safado at Carnaval" },
-  { src: dani1, alt: "With Daniel Faria" },
-  { src: ciro1, alt: "Ciro Belluci performing" },
-  { src: silas2, alt: "Silas Prado saxophone" },
-  { src: igaraBdmg123, alt: "BDMG Instrumental" },
-];
 
-const GALLERY_ROW_2 = [
-  { src: ciro2, alt: "Ciro Belluci piano" },
-  { src: igara5, alt: "Igara Silva live" },
-  { src: dani2, alt: "Daniel Faria guitar" },
-  { src: swingSafado7, alt: "Swing Safado celebration" },
-  { src: igaraBdmg89, alt: "BDMG performance" },
-  { src: silas4, alt: "Briki with Silas Prado" },
-];
-
-const GALLERY_ROW_3 = [
-  { src: igaraBdmg60, alt: "BDMG bass" },
-  { src: dani3, alt: "Full band with Daniel Faria" },
-  { src: igara2, alt: "Igara ensemble" },
-  { src: ciro3, alt: "Ciro Belluci musicians" },
-  { src: heroPhoto, alt: "Khalil Briki portrait" },
-  { src: igara1, alt: "Briki on stage" },
-];
-
-function HorizontalScrollGallery() {
+function ProjectScrollSection({ project, index }: { project: typeof PROJECTS[number]; index: number }) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const row1Ref = useRef<HTMLDivElement>(null);
-  const row2Ref = useRef<HTMLDivElement>(null);
-  const row3Ref = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const slug = project.title.toLowerCase().replace(/\s+/g, "-");
+  const hasMultiplePhotos = project.photos.length > 1;
 
   useLayoutEffect(() => {
+    if (!hasMultiplePhotos) return;
     const ctx = gsap.context(() => {
       const section = sectionRef.current;
-      if (!section) return;
+      const track = trackRef.current;
+      if (!section || !track) return;
 
-      const tl = gsap.timeline({
+      const totalScroll = track.scrollWidth - window.innerWidth;
+
+      gsap.to(track, {
+        x: -totalScroll,
+        ease: "none",
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=200%",
+          end: () => `+=${totalScroll}`,
           pin: true,
-          scrub: 1,
+          scrub: 0.8,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
-
-      tl.to(row1Ref.current, { x: "-30%", ease: "none" }, 0);
-      tl.to(row2Ref.current, { x: "20%", ease: "none" }, 0);
-      tl.to(row3Ref.current, { x: "-25%", ease: "none" }, 0);
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
-
-  const renderRow = (
-    ref: React.RefObject<HTMLDivElement>,
-    images: { src: string; alt: string }[],
-    initialOffset: string,
-  ) => (
-    <div
-      ref={ref as React.RefObject<HTMLDivElement>}
-      className="flex gap-3 md:gap-4 will-change-transform"
-      style={{ transform: `translateX(${initialOffset})` }}
-    >
-      {images.map((img, i) => (
-        <div
-          key={i}
-          className="relative flex-shrink-0 w-[280px] md:w-[360px] lg:w-[420px] aspect-[16/10] rounded-xl overflow-hidden"
-        >
-          <img
-            src={img.src}
-            alt={img.alt}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/40 via-transparent to-stone-950/20" />
-        </div>
-      ))}
-    </div>
-  );
+  }, [hasMultiplePhotos]);
 
   return (
     <div
       ref={sectionRef}
-      className="relative h-screen overflow-hidden flex flex-col justify-center gap-3 md:gap-4 bg-stone-950"
-      data-testid="gallery-horizontal-scroll"
+      className={`relative ${hasMultiplePhotos ? "h-screen overflow-hidden" : ""}`}
+      data-testid={`project-scroll-${slug}`}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-stone-900/30 via-transparent to-stone-900/30 pointer-events-none z-10" />
-      {renderRow(row1Ref, GALLERY_ROW_1, "-10%")}
-      {renderRow(row2Ref, GALLERY_ROW_2, "-30%")}
-      {renderRow(row3Ref, GALLERY_ROW_3, "-5%")}
+      <div className={`${hasMultiplePhotos ? "absolute top-0 left-0 right-0 z-10 px-6 pt-8 pb-4" : "px-6 pt-16 pb-6 max-w-6xl mx-auto"}`}>
+        <div className={hasMultiplePhotos ? "max-w-6xl mx-auto" : ""}>
+          <span className="inline-block font-mono text-xs tracking-[0.3em] uppercase text-amber-600/80 mb-2">
+            {project.role}
+          </span>
+          <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-stone-100 mb-3">
+            {project.title}
+          </h3>
+          <p className="text-stone-400 text-sm md:text-base leading-relaxed max-w-3xl">
+            {project.description}
+          </p>
+        </div>
+      </div>
+
+      {hasMultiplePhotos ? (
+        <>
+          <div className="absolute inset-0 bg-gradient-to-b from-stone-950/90 via-stone-950/30 to-stone-950/60 pointer-events-none z-[5]" />
+          <div
+            ref={trackRef}
+            className="flex items-end h-full gap-4 md:gap-6 will-change-transform px-6 pb-8"
+            style={{ width: "max-content" }}
+          >
+            {project.photos.map((photo, i) => (
+              <div
+                key={i}
+                className="relative flex-shrink-0 w-[70vw] md:w-[50vw] lg:w-[40vw] h-[55vh] md:h-[60vh] rounded-xl overflow-hidden"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/50 via-transparent to-transparent" />
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="max-w-2xl mx-auto px-6 pb-16">
+          <div className="relative rounded-xl overflow-hidden aspect-[16/10]">
+            <img
+              src={project.photos[0]?.src}
+              alt={project.photos[0]?.alt}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-stone-950/40 via-transparent to-transparent" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -572,44 +568,20 @@ export default function Home() {
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-800/50 to-transparent" />
       </section>
 
-      {/* HORIZONTAL SCROLL GALLERY */}
-      <HorizontalScrollGallery />
-
       {/* SELECTED PROJECTS */}
-      <section id="projects" className="relative py-24 md:py-32 bg-stone-900/30" data-testid="section-projects">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="projects" className="relative" data-testid="section-projects">
+        <div className="py-16 md:py-24 max-w-6xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Selected Projects</SectionLabel>
             <SectionTitle>Collaborations</SectionTitle>
           </FadeInSection>
-
-          <FadeInSection delay={0.15}>
-            <Accordion type="single" collapsible className="mt-12">
-              {PROJECTS.map((project, i) => (
-                <AccordionItem
-                  key={project.title}
-                  value={project.title}
-                  className="border-stone-800/40 data-[state=open]:border-amber-800/30"
-                  data-testid={`card-project-${i}`}
-                >
-                  <AccordionTrigger className="py-6 md:py-8 hover:no-underline group">
-                    <div className="flex flex-col items-start text-left gap-1 pr-4">
-                      <h3 className="font-serif text-xl md:text-2xl text-stone-100 group-hover:text-amber-400/90 transition-colors duration-300">
-                        {project.title}
-                      </h3>
-                      <span className="font-mono text-xs tracking-wider text-amber-600/60 uppercase">
-                        {project.role}
-                      </span>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="pb-8">
-                    <ProjectPhotoSlider photos={project.photos} title={project.title} description={project.description} />
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </FadeInSection>
         </div>
+
+        {PROJECTS.map((project, i) => (
+          <ProjectScrollSection key={project.title} project={project} index={i} />
+        ))}
+
+        <div className="h-px bg-gradient-to-r from-transparent via-stone-800/50 to-transparent" />
       </section>
 
       {/* FESTIVALS & MAJOR EVENTS */}
@@ -819,138 +791,6 @@ export default function Home() {
   );
 }
 
-function splitDescription(description: string, count: number): string[] {
-  if (count <= 1) return [description];
-  const sentences = description.match(/[^.!?]+[.!?]+/g) || [description];
-  if (sentences.length <= count) {
-    const result: string[] = [];
-    for (let i = 0; i < count; i++) {
-      result.push(sentences[i] ? sentences[i].trim() : "");
-    }
-    return result;
-  }
-  const perChunk = Math.ceil(sentences.length / count);
-  const result: string[] = [];
-  for (let i = 0; i < count; i++) {
-    const chunk = sentences.slice(i * perChunk, (i + 1) * perChunk).join(" ").trim();
-    result.push(chunk);
-  }
-  return result;
-}
-
-function ProjectPhotoSlider({ photos, title, description }: { photos: { src: string; alt: string }[]; title: string; description: string }) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [progress, setProgress] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const descriptionParts = splitDescription(description, photos.length);
-  const slug = title.toLowerCase().replace(/\s+/g, "-");
-  const AUTO_ADVANCE_MS = 5000;
-  const TICK_MS = 30;
-
-  const goTo = (index: number) => {
-    setProgress(0);
-    if (index < 0) setCurrentIndex(photos.length - 1);
-    else if (index >= photos.length) setCurrentIndex(0);
-    else setCurrentIndex(index);
-  };
-
-  useEffect(() => {
-    if (photos.length <= 1 || paused) return;
-    setProgress(0);
-    timerRef.current = setInterval(() => {
-      setProgress((prev) => {
-        const next = prev + (TICK_MS / AUTO_ADVANCE_MS) * 100;
-        if (next >= 100) {
-          setCurrentIndex((ci) => (ci + 1) % photos.length);
-          return 0;
-        }
-        return next;
-      });
-    }, TICK_MS);
-    return () => { if (timerRef.current) clearInterval(timerRef.current); };
-  }, [currentIndex, photos.length, paused]);
-
-  return (
-    <div className="max-w-2xl mx-auto" data-testid={`slider-${slug}`}>
-      <div
-        className="relative group/slider rounded-xl overflow-hidden"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        <div className="relative aspect-[16/10] bg-stone-900">
-          {photos.map((photo, i) => (
-            <motion.img
-              key={i}
-              src={photo.src}
-              alt={photo.alt}
-              className="absolute inset-0 w-full h-full object-cover"
-              initial={false}
-              animate={{ opacity: i === currentIndex ? 1 : 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              loading="lazy"
-            />
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-transparent to-transparent" />
-        </div>
-
-        {photos.length > 1 && (
-          <>
-            <div className="absolute bottom-0 left-0 right-0 h-1 bg-stone-800/60 z-10">
-              <div
-                className="h-full bg-amber-500/80 transition-none"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-            <button
-              onClick={() => goTo(currentIndex - 1)}
-              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
-              aria-label="Previous photo"
-              data-testid={`slider-prev-${slug}`}
-            >
-              <ChevronDown className="w-4 h-4 rotate-90" />
-            </button>
-            <button
-              onClick={() => goTo(currentIndex + 1)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-stone-900/70 backdrop-blur-sm border border-stone-700/50 flex items-center justify-center text-stone-300 hover:text-amber-400 hover:border-amber-700/50 transition-all duration-200 opacity-0 group-hover/slider:opacity-100"
-              aria-label="Next photo"
-              data-testid={`slider-next-${slug}`}
-            >
-              <ChevronDown className="w-4 h-4 -rotate-90" />
-            </button>
-          </>
-        )}
-      </div>
-
-      <div className="mt-4 min-h-[3rem]">
-        <motion.p
-          key={currentIndex}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
-          className="text-stone-400 leading-relaxed text-sm md:text-base"
-        >
-          {descriptionParts[currentIndex]}
-        </motion.p>
-      </div>
-
-      {photos.length > 1 && (
-        <div className="flex justify-center gap-2 mt-4">
-          {photos.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => goTo(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === currentIndex ? "bg-amber-500 w-6" : "bg-stone-700 w-1.5 hover:bg-stone-500"
-              }`}
-              aria-label={`Go to photo ${i + 1}`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
 
 function SandParticles() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
