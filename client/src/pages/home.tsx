@@ -34,6 +34,9 @@ import ciro1 from "@assets/Ciro_(1)_1771707549351.jpg";
 import ciro2 from "@assets/Ciro_(2)_1771707549351.jpg";
 import ciro3 from "@assets/Ciro_(3)_1771707549351.jpg";
 import heroPhoto from "@assets/Silas_12_1771708035525.jpg";
+import amazighPattern from "@assets/pngtree-amazigh-background-moons-and-stars-picture-image_19909_1772205968269.png";
+import tunisianPattern from "@assets/traditional-tunisian-embroidery-pattern-seamless-600nw-228781_1772205968269.webp";
+import textilePattern from "@assets/cultural-textile-patterns-stockcake_1772205968269.webp";
 
 function FadeInSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -54,15 +57,19 @@ function FadeInSection({ children, className = "", delay = 0 }: { children: Reac
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-block font-mono text-xs tracking-[0.3em] uppercase text-amber-600/80 dark:text-amber-500/70 mb-4">
-      {children}
-    </span>
+    <div className="flex items-center gap-3 mb-4">
+      <span className="inline-block w-6 h-px bg-gradient-to-r from-[hsl(var(--textile-ochre))] to-transparent" />
+      <span className="inline-block font-mono text-xs tracking-[0.3em] uppercase text-[hsl(var(--textile-ochre))]">
+        {children}
+      </span>
+      <span className="inline-block w-6 h-px bg-gradient-to-l from-[hsl(var(--textile-ochre))] to-transparent" />
+    </div>
   );
 }
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
-    <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl tracking-tight text-stone-100 mb-6">
+    <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl tracking-tight text-[hsl(var(--textile-cream))] mb-6">
       {children}
     </h2>
   );
@@ -255,10 +262,10 @@ function ProjectScrollSection({ project, index }: { project: typeof PROJECTS[num
     >
       <div className={`${hasMultiplePhotos ? "absolute top-0 left-0 right-0 z-10 px-6 pt-8 pb-4" : "px-6 pt-16 pb-6 max-w-6xl mx-auto"}`}>
         <div className={hasMultiplePhotos ? "max-w-6xl mx-auto" : ""}>
-          <span className="inline-block font-mono text-xs tracking-[0.3em] uppercase text-amber-600/80 mb-2">
+          <span className="inline-block font-mono text-xs tracking-[0.3em] uppercase text-[hsl(var(--textile-ochre)/0.8)] mb-2">
             {project.role}
           </span>
-          <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-stone-100 mb-3">
+          <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-[hsl(var(--textile-cream))] mb-3">
             {project.title}
           </h3>
           <p className="text-stone-400 text-sm md:text-base leading-relaxed max-w-3xl">
@@ -354,14 +361,14 @@ export default function Home() {
         initial={{ y: -100 }}
         animate={{ y: navVisible ? 0 : -100 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-stone-950/80 border-b border-stone-800/50"
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-stone-950/85 border-b border-[hsl(var(--textile-ochre)/0.15)]"
         data-testid="nav-bar"
       >
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-            className="font-serif text-lg text-stone-100 tracking-wide"
+            className="font-serif text-lg text-[hsl(var(--textile-cream))] tracking-wide"
             data-testid="nav-logo"
           >
             KB
@@ -374,8 +381,8 @@ export default function Home() {
                 onClick={(e) => { e.preventDefault(); scrollToSection(item.href); }}
                 className={`text-sm tracking-wide transition-colors duration-300 ${
                   activeSection === item.href.slice(1)
-                    ? "text-amber-500"
-                    : "text-stone-400 hover:text-stone-200"
+                    ? "text-[hsl(var(--textile-ochre))]"
+                    : "text-stone-400 hover:text-[hsl(var(--textile-cream))]"
                 }`}
                 data-testid={`nav-link-${item.href.slice(1)}`}
               >
@@ -386,7 +393,7 @@ export default function Home() {
           <a
             href="#contact"
             onClick={(e) => { e.preventDefault(); scrollToSection("#contact"); }}
-            className="text-sm text-amber-500 tracking-wide hover:text-amber-400 transition-colors"
+            className="text-sm text-[hsl(var(--textile-ochre))] tracking-wide hover:text-[hsl(var(--textile-cream))] transition-colors"
             data-testid="nav-contact"
           >
             Contact
@@ -397,16 +404,29 @@ export default function Home() {
       {/* HERO SECTION */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden" data-testid="section-hero">
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-stone-950 via-stone-900 to-amber-950/30" />
+          <div className="absolute inset-0 bg-gradient-to-br from-stone-950 via-[hsl(var(--textile-indigo)/0.3)] to-[hsl(var(--textile-red-deep)/0.2)]" />
           <div
-            className="absolute inset-0 opacity-[0.06]"
+            className="absolute inset-0 opacity-[0.07]"
             style={{
-              backgroundImage: "url('/images/pattern-bg.png')",
-              backgroundSize: "cover",
+              backgroundImage: `url(${amazighPattern})`,
+              backgroundSize: "600px",
               backgroundPosition: "center",
+              backgroundRepeat: "repeat",
+              mixBlendMode: "soft-light",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/50" />
+          <div
+            className="absolute right-0 top-0 bottom-0 w-1/3 opacity-[0.04]"
+            style={{
+              backgroundImage: `url(${tunisianPattern})`,
+              backgroundSize: "300px",
+              backgroundRepeat: "repeat-y",
+              backgroundPosition: "right center",
+              maskImage: "linear-gradient(to left, black, transparent)",
+              WebkitMaskImage: "linear-gradient(to left, black, transparent)",
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-transparent to-stone-950/60" />
         </motion.div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-screen">
@@ -422,15 +442,15 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.5 }}
               className="mb-6"
             >
-              <span className="font-mono text-xs tracking-[0.4em] uppercase text-amber-600/70">
+              <span className="font-mono text-xs tracking-[0.4em] uppercase text-[hsl(var(--textile-ochre)/0.7)]">
                 Bassist &bull; Composer &bull; Musical Director
               </span>
             </motion.div>
 
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-stone-100 tracking-tight leading-[0.95] mb-8">
+            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-[hsl(var(--textile-cream))] tracking-tight leading-[0.95] mb-8">
               Khalil
               <br />
-              <span className="italic text-amber-500/90">Briki</span>
+              <span className="italic text-[hsl(var(--textile-ochre))]">Briki</span>
             </h1>
 
             <p className="font-serif text-lg md:text-xl text-stone-400 italic leading-relaxed max-w-lg mx-auto lg:mx-0 mb-10">
@@ -442,7 +462,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
               <Button
                 variant="default"
-                className="bg-amber-700 text-stone-100 border-amber-600 rounded-full px-8"
+                className="bg-[hsl(var(--textile-red))] hover:bg-[hsl(var(--textile-red-deep))] text-stone-100 border-[hsl(var(--textile-red)/0.6)] rounded-full px-8"
                 onClick={() => scrollToSection("#media")}
                 data-testid="button-listen"
               >
@@ -451,7 +471,7 @@ export default function Home() {
               </Button>
               <Button
                 variant="outline"
-                className="border-stone-600 text-stone-300 rounded-full px-8 bg-transparent"
+                className="border-[hsl(var(--textile-ochre)/0.4)] text-[hsl(var(--textile-cream))] rounded-full px-8 bg-transparent"
                 data-testid="button-press-kit"
               >
                 <FileText className="w-4 h-4 mr-2" />
@@ -459,7 +479,7 @@ export default function Home() {
               </Button>
               <Button
                 variant="outline"
-                className="border-stone-600 text-stone-300 rounded-full px-8 bg-transparent"
+                className="border-[hsl(var(--textile-teal)/0.4)] text-stone-300 rounded-full px-8 bg-transparent"
                 onClick={() => scrollToSection("#contact")}
                 data-testid="button-contact"
               >
@@ -476,8 +496,8 @@ export default function Home() {
             className="order-1 lg:order-2 flex justify-center"
           >
             <div className="relative w-72 md:w-80 lg:w-96">
-              <div className="absolute -inset-8 bg-gradient-to-br from-amber-700/30 via-red-900/20 to-stone-900/30 rounded-3xl blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
-              <div className="absolute -inset-4 bg-gradient-to-tr from-amber-600/15 to-transparent rounded-2xl blur-xl" />
+              <div className="absolute -inset-8 bg-gradient-to-br from-[hsl(var(--textile-ochre)/0.25)] via-[hsl(var(--textile-red)/0.2)] to-[hsl(var(--textile-indigo)/0.15)] rounded-3xl blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
+              <div className="absolute -inset-4 bg-gradient-to-tr from-[hsl(var(--textile-ochre)/0.12)] to-transparent rounded-2xl blur-xl" />
               <img
                 src={heroPhoto}
                 alt="Khalil Briki"
@@ -487,7 +507,7 @@ export default function Home() {
               />
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-stone-950/70 via-stone-950/10 to-transparent" />
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-stone-950/40 via-transparent to-stone-950/40" />
-              <div className="absolute inset-0 rounded-2xl mix-blend-overlay bg-gradient-to-br from-amber-500/10 via-transparent to-red-900/10" />
+              <div className="absolute inset-0 rounded-2xl mix-blend-overlay bg-gradient-to-br from-[hsl(var(--textile-ochre)/0.1)] via-transparent to-[hsl(var(--textile-red)/0.1)]" />
             </div>
           </motion.div>
         </div>
@@ -502,14 +522,14 @@ export default function Home() {
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           >
-            <ChevronDown className="w-6 h-6 text-stone-500" />
+            <ChevronDown className="w-6 h-6 text-[hsl(var(--textile-ochre)/0.5)]" />
           </motion.div>
         </motion.div>
       </section>
 
       <main>
       {/* ARTISTIC PROFILE */}
-      <section id="profile" className="relative py-24 md:py-32" data-testid="section-profile">
+      <section id="profile" className="relative py-24 md:py-32 diamond-pattern" data-testid="section-profile">
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Artistic Profile</SectionLabel>
@@ -532,31 +552,31 @@ export default function Home() {
             <FadeInSection delay={0.4}>
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-amber-900/30 border border-amber-800/30 flex items-center justify-center flex-shrink-0 mt-1">
-                    <Globe className="w-4 h-4 text-amber-500/70" />
+                  <div className="w-10 h-10 rounded-full bg-[hsl(var(--textile-teal)/0.15)] border border-[hsl(var(--textile-teal)/0.25)] flex items-center justify-center flex-shrink-0 mt-1">
+                    <Globe className="w-4 h-4 text-[hsl(var(--textile-teal))]" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-stone-200 text-lg mb-1">Multilingual</h3>
+                    <h3 className="font-serif text-[hsl(var(--textile-cream))] text-lg mb-1">Multilingual</h3>
                     <p className="text-stone-500 text-sm">Arabic, Tunisian dialect, French, English, Portuguese — five languages bridging countless musical dialects and cultural traditions.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-amber-900/30 border border-amber-800/30 flex items-center justify-center flex-shrink-0 mt-1">
-                    <MapPin className="w-4 h-4 text-amber-500/70" />
+                  <div className="w-10 h-10 rounded-full bg-[hsl(var(--textile-red)/0.15)] border border-[hsl(var(--textile-red)/0.25)] flex items-center justify-center flex-shrink-0 mt-1">
+                    <MapPin className="w-4 h-4 text-[hsl(var(--textile-red))]" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-stone-200 text-lg mb-1">Tunisia to Brazil</h3>
+                    <h3 className="font-serif text-[hsl(var(--textile-cream))] text-lg mb-1">Tunisia to Brazil</h3>
                     <p className="text-stone-500 text-sm">Trained at Ariana Public Conservatory and Jazz Club de Tunis, then immersed at Bituca — Universidade de Música Popular under masters Enéias Xavier, Aloízio Horta, and Pitágoras Silveira.</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-full bg-amber-900/30 border border-amber-800/30 flex items-center justify-center flex-shrink-0 mt-1">
-                    <Music className="w-4 h-4 text-amber-500/70" />
+                  <div className="w-10 h-10 rounded-full bg-[hsl(var(--textile-ochre)/0.15)] border border-[hsl(var(--textile-ochre)/0.25)] flex items-center justify-center flex-shrink-0 mt-1">
+                    <Music className="w-4 h-4 text-[hsl(var(--textile-ochre))]" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-stone-200 text-lg mb-1">Philosophy</h3>
+                    <h3 className="font-serif text-[hsl(var(--textile-cream))] text-lg mb-1">Philosophy</h3>
                     <p className="text-stone-500 text-sm">Friendship fuels creativity. Professionalism sustains it. Music built on mutual respect, shared vision, and collective growth.</p>
                   </div>
                 </div>
@@ -565,11 +585,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-800/50 to-transparent" />
+        <div className="absolute top-0 left-0 w-full textile-band-thin" />
       </section>
 
       {/* SELECTED PROJECTS */}
       <section id="projects" className="relative" data-testid="section-projects">
+        <div className="textile-band" />
         <div className="py-16 md:py-24 max-w-6xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Selected Projects</SectionLabel>
@@ -581,11 +602,21 @@ export default function Home() {
           <ProjectScrollSection key={project.title} project={project} index={i} />
         ))}
 
-        <div className="h-px bg-gradient-to-r from-transparent via-stone-800/50 to-transparent" />
+        <div className="textile-band" />
       </section>
 
       {/* FESTIVALS & MAJOR EVENTS */}
       <section id="festivals" className="relative py-24 md:py-32" data-testid="section-festivals">
+        <div
+          className="absolute left-0 top-0 bottom-0 w-16 opacity-[0.03]"
+          style={{
+            backgroundImage: `url(${tunisianPattern})`,
+            backgroundSize: "200px",
+            backgroundRepeat: "repeat-y",
+            maskImage: "linear-gradient(to right, black, transparent)",
+            WebkitMaskImage: "linear-gradient(to right, black, transparent)",
+          }}
+        />
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Festivals & Events</SectionLabel>
@@ -601,18 +632,18 @@ export default function Home() {
                 <div
                   className={`relative p-6 rounded-xl border transition-all duration-300 ${
                     festival.highlight
-                      ? "border-amber-700/40 bg-amber-950/20"
-                      : "border-stone-800/40 hover:border-stone-700/50"
+                      ? "border-[hsl(var(--textile-ochre)/0.4)] bg-[hsl(var(--textile-ochre)/0.05)]"
+                      : "border-stone-800/40 hover:border-[hsl(var(--textile-teal)/0.3)]"
                   }`}
                   data-testid={`card-festival-${i}`}
                 >
                   {festival.highlight && (
                     <div className="flex items-center gap-2 mb-3">
-                      <Award className="w-4 h-4 text-amber-500" />
-                      <span className="font-mono text-xs text-amber-500 tracking-wider uppercase">Award</span>
+                      <Award className="w-4 h-4 text-[hsl(var(--textile-ochre))]" />
+                      <span className="font-mono text-xs text-[hsl(var(--textile-ochre))] tracking-wider uppercase">Award</span>
                     </div>
                   )}
-                  <h3 className="font-serif text-lg text-stone-200 mb-1">{festival.name}</h3>
+                  <h3 className="font-serif text-lg text-[hsl(var(--textile-cream))] mb-1">{festival.name}</h3>
                   <p className="text-sm text-stone-500">{festival.detail}</p>
                 </div>
               </FadeInSection>
@@ -620,11 +651,12 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-800/50 to-transparent" />
+        <div className="absolute top-0 left-0 w-full textile-band-thin" />
       </section>
 
       {/* EDUCATION & MENTORSHIP */}
-      <section id="education" className="relative py-24 md:py-32 bg-stone-900/30" data-testid="section-education">
+      <section id="education" className="relative py-24 md:py-32 bg-[hsl(var(--textile-indigo)/0.08)]" data-testid="section-education">
+        <div className="geometric-divider absolute top-0 left-0 right-0" />
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Education & Mentorship</SectionLabel>
@@ -640,11 +672,11 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {EDUCATION_TOPICS.map((topic, i) => (
               <FadeInSection key={topic.title} delay={i * 0.08}>
-                <div className="p-6 rounded-xl border border-stone-800/30 hover:border-amber-800/20 transition-all duration-300" data-testid={`card-education-${i}`}>
-                  <div className="w-8 h-8 rounded-full bg-amber-900/20 border border-amber-800/20 flex items-center justify-center mb-4">
-                    <GraduationCap className="w-3.5 h-3.5 text-amber-500/60" />
+                <div className="p-6 rounded-xl border border-[hsl(var(--textile-indigo)/0.2)] hover:border-[hsl(var(--textile-ochre)/0.3)] transition-all duration-300 bg-stone-950/30" data-testid={`card-education-${i}`}>
+                  <div className="w-8 h-8 rounded-full bg-[hsl(var(--textile-ochre)/0.12)] border border-[hsl(var(--textile-ochre)/0.2)] flex items-center justify-center mb-4">
+                    <GraduationCap className="w-3.5 h-3.5 text-[hsl(var(--textile-ochre)/0.7)]" />
                   </div>
-                  <h3 className="font-serif text-stone-200 text-lg mb-2">{topic.title}</h3>
+                  <h3 className="font-serif text-[hsl(var(--textile-cream))] text-lg mb-2">{topic.title}</h3>
                   <p className="text-stone-500 text-sm leading-relaxed">{topic.description}</p>
                 </div>
               </FadeInSection>
@@ -654,7 +686,7 @@ export default function Home() {
       </section>
 
       {/* MEDIA SECTION */}
-      <section id="media" className="relative py-24 md:py-32" data-testid="section-media">
+      <section id="media" className="relative py-24 md:py-32 diamond-pattern" data-testid="section-media">
         <div className="max-w-5xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Media</SectionLabel>
@@ -663,9 +695,9 @@ export default function Home() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
             <FadeInSection delay={0.1}>
-              <a href="#" aria-label="YouTube channel" className="relative aspect-video rounded-xl border border-stone-800/50 bg-stone-900/50 flex flex-col items-center justify-center gap-4 group hover:border-amber-800/30 transition-colors duration-300 cursor-pointer" data-testid="media-youtube">
-                <div className="w-16 h-16 rounded-full bg-red-900/20 border border-red-800/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <SiYoutube className="w-7 h-7 text-red-400/70" />
+              <a href="#" aria-label="YouTube channel" className="relative aspect-video rounded-xl border border-stone-800/50 bg-stone-900/50 flex flex-col items-center justify-center gap-4 group hover:border-[hsl(var(--textile-red)/0.4)] transition-colors duration-300 cursor-pointer" data-testid="media-youtube">
+                <div className="w-16 h-16 rounded-full bg-[hsl(var(--textile-red)/0.12)] border border-[hsl(var(--textile-red)/0.25)] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <SiYoutube className="w-7 h-7 text-[hsl(var(--textile-red))]" />
                 </div>
                 <span className="text-stone-400 text-sm font-mono tracking-wider">YouTube</span>
                 <p className="text-stone-600 text-xs">Video performances & sessions</p>
@@ -673,9 +705,9 @@ export default function Home() {
             </FadeInSection>
 
             <FadeInSection delay={0.2}>
-              <a href="#" aria-label="Spotify profile" className="relative aspect-video rounded-xl border border-stone-800/50 bg-stone-900/50 flex flex-col items-center justify-center gap-4 group hover:border-amber-800/30 transition-colors duration-300 cursor-pointer" data-testid="media-spotify">
-                <div className="w-16 h-16 rounded-full bg-green-900/20 border border-green-800/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <SiSpotify className="w-7 h-7 text-green-400/70" />
+              <a href="#" aria-label="Spotify profile" className="relative aspect-video rounded-xl border border-stone-800/50 bg-stone-900/50 flex flex-col items-center justify-center gap-4 group hover:border-[hsl(var(--textile-teal)/0.4)] transition-colors duration-300 cursor-pointer" data-testid="media-spotify">
+                <div className="w-16 h-16 rounded-full bg-[hsl(var(--textile-teal)/0.12)] border border-[hsl(var(--textile-teal)/0.25)] flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <SiSpotify className="w-7 h-7 text-[hsl(var(--textile-teal))]" />
                 </div>
                 <span className="text-stone-400 text-sm font-mono tracking-wider">Spotify</span>
                 <p className="text-stone-600 text-xs">Streaming & discography</p>
@@ -685,25 +717,25 @@ export default function Home() {
 
           <FadeInSection delay={0.3}>
             <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <a href="#" aria-label="Press photos gallery" className="block rounded-xl border border-stone-800/50 p-6 hover:border-amber-800/30 transition-colors duration-300 cursor-pointer" data-testid="media-photos">
+              <a href="#" aria-label="Press photos gallery" className="block rounded-xl border border-stone-800/50 p-6 hover:border-[hsl(var(--textile-ochre)/0.3)] transition-colors duration-300 cursor-pointer" data-testid="media-photos">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-stone-800/50 flex items-center justify-center">
-                    <ExternalLink className="w-4 h-4 text-stone-400" />
+                  <div className="w-10 h-10 rounded-full bg-[hsl(var(--textile-ochre)/0.1)] flex items-center justify-center">
+                    <ExternalLink className="w-4 h-4 text-[hsl(var(--textile-ochre)/0.7)]" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-stone-200">Press Photos</h3>
+                    <h3 className="font-serif text-[hsl(var(--textile-cream))]">Press Photos</h3>
                     <p className="text-xs text-stone-600">High resolution gallery</p>
                   </div>
                 </div>
               </a>
 
-              <a href="#" aria-label="Download press kit PDF" className="block rounded-xl border border-stone-800/50 p-6 hover:border-amber-800/30 transition-colors duration-300 cursor-pointer" data-testid="media-press-kit">
+              <a href="#" aria-label="Download press kit PDF" className="block rounded-xl border border-stone-800/50 p-6 hover:border-[hsl(var(--textile-ochre)/0.3)] transition-colors duration-300 cursor-pointer" data-testid="media-press-kit">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-stone-800/50 flex items-center justify-center">
-                    <FileText className="w-4 h-4 text-stone-400" />
+                  <div className="w-10 h-10 rounded-full bg-[hsl(var(--textile-ochre)/0.1)] flex items-center justify-center">
+                    <FileText className="w-4 h-4 text-[hsl(var(--textile-ochre)/0.7)]" />
                   </div>
                   <div>
-                    <h3 className="font-serif text-stone-200">Press Kit</h3>
+                    <h3 className="font-serif text-[hsl(var(--textile-cream))]">Press Kit</h3>
                     <p className="text-xs text-stone-600">Downloadable PDF</p>
                   </div>
                 </div>
@@ -712,12 +744,21 @@ export default function Home() {
           </FadeInSection>
         </div>
 
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-800/50 to-transparent" />
+        <div className="absolute top-0 left-0 w-full textile-band-thin" />
       </section>
 
       {/* CONTACT SECTION */}
-      <section id="contact" className="relative py-24 md:py-32 bg-stone-900/30" data-testid="section-contact">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+      <section id="contact" className="relative py-24 md:py-32 bg-[hsl(var(--textile-indigo)/0.06)]" data-testid="section-contact">
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url(${textilePattern})`,
+            backgroundSize: "400px",
+            backgroundPosition: "center",
+            backgroundRepeat: "repeat",
+          }}
+        />
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
           <FadeInSection>
             <SectionLabel>Contact</SectionLabel>
             <SectionTitle>Let's Connect</SectionTitle>
@@ -730,12 +771,12 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <a
                 href="mailto:contact@khalilbriki.com"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-stone-800/50 hover:border-amber-800/30 transition-all duration-300 w-full sm:w-auto"
+                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-ochre)/0.2)] hover:border-[hsl(var(--textile-ochre)/0.4)] transition-all duration-300 w-full sm:w-auto bg-stone-950/40"
                 data-testid="contact-email"
               >
-                <Mail className="w-5 h-5 text-amber-500/70" />
+                <Mail className="w-5 h-5 text-[hsl(var(--textile-ochre)/0.8)]" />
                 <div className="text-left">
-                  <span className="block text-stone-200 text-sm">Email</span>
+                  <span className="block text-[hsl(var(--textile-cream))] text-sm">Email</span>
                   <span className="block text-stone-500 text-xs">contact@khalilbriki.com</span>
                 </div>
               </a>
@@ -744,12 +785,12 @@ export default function Home() {
                 href="https://instagram.com/khalilbriki"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-stone-800/50 hover:border-amber-800/30 transition-all duration-300 w-full sm:w-auto"
+                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-red)/0.2)] hover:border-[hsl(var(--textile-red)/0.4)] transition-all duration-300 w-full sm:w-auto bg-stone-950/40"
                 data-testid="contact-instagram"
               >
-                <SiInstagram className="w-5 h-5 text-amber-500/70" />
+                <SiInstagram className="w-5 h-5 text-[hsl(var(--textile-red)/0.8)]" />
                 <div className="text-left">
-                  <span className="block text-stone-200 text-sm">Instagram</span>
+                  <span className="block text-[hsl(var(--textile-cream))] text-sm">Instagram</span>
                   <span className="block text-stone-500 text-xs">@khalilbriki</span>
                 </div>
               </a>
@@ -758,12 +799,12 @@ export default function Home() {
                 href="https://wa.me/5500000000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-stone-800/50 hover:border-amber-800/30 transition-all duration-300 w-full sm:w-auto"
+                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[hsl(var(--textile-teal)/0.2)] hover:border-[hsl(var(--textile-teal)/0.4)] transition-all duration-300 w-full sm:w-auto bg-stone-950/40"
                 data-testid="contact-whatsapp"
               >
-                <SiWhatsapp className="w-5 h-5 text-amber-500/70" />
+                <SiWhatsapp className="w-5 h-5 text-[hsl(var(--textile-teal)/0.8)]" />
                 <div className="text-left">
-                  <span className="block text-stone-200 text-sm">WhatsApp</span>
+                  <span className="block text-[hsl(var(--textile-cream))] text-sm">WhatsApp</span>
                   <span className="block text-stone-500 text-xs">Booking inquiries</span>
                 </div>
               </a>
@@ -774,12 +815,13 @@ export default function Home() {
 
       </main>
 
-      <footer className="border-t border-stone-800/50 py-8">
-        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <footer className="relative py-8">
+        <div className="textile-band" />
+        <div className="max-w-5xl mx-auto px-6 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <span className="font-serif text-stone-600 text-sm">
             Khalil Briki &copy; {new Date().getFullYear()}
           </span>
-          <span className="text-stone-700 text-xs font-mono tracking-wider">
+          <span className="text-[hsl(var(--textile-ochre)/0.4)] text-xs font-mono tracking-wider">
             Tunisia &bull; Brazil &bull; Global South
           </span>
         </div>
@@ -836,7 +878,7 @@ function SandParticles() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(194, 163, 120, ${p.opacity})`;
+        ctx.fillStyle = `rgba(194, 150, 106, ${p.opacity})`;
         ctx.fill();
       });
 

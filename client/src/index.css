@@ -179,7 +179,7 @@
   }
 
   ::selection {
-    background-color: rgba(180, 120, 60, 0.3);
+    background-color: rgba(180, 80, 50, 0.35);
     color: inherit;
   }
 
@@ -187,6 +187,58 @@
     display: none;
   }
 }
+
+:root, .dark {
+  --textile-red: 5 55% 40%;
+  --textile-red-deep: 2 50% 30%;
+  --textile-indigo: 225 45% 25%;
+  --textile-teal: 175 40% 35%;
+  --textile-ochre: 38 70% 50%;
+  --textile-cream: 35 40% 85%;
+}
+
+.geometric-divider {
+  height: 24px;
+  background-image:
+    linear-gradient(135deg, hsl(var(--textile-red)) 25%, transparent 25%),
+    linear-gradient(225deg, hsl(var(--textile-red)) 25%, transparent 25%),
+    linear-gradient(315deg, hsl(var(--textile-red)) 25%, transparent 25%),
+    linear-gradient(45deg, hsl(var(--textile-red)) 25%, transparent 25%);
+  background-size: 24px 12px;
+  background-position: 0 0, 0 0, 0 12px, 0 12px;
+  opacity: 0.15;
+}
+
+.textile-band {
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--textile-red)) 0%,
+    hsl(var(--textile-ochre)) 25%,
+    hsl(var(--textile-teal)) 50%,
+    hsl(var(--textile-indigo)) 75%,
+    hsl(var(--textile-red)) 100%
+  );
+  opacity: 0.5;
+}
+
+.textile-band-thin {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(var(--textile-ochre) / 0.4) 20%,
+    hsl(var(--textile-red) / 0.6) 50%,
+    hsl(var(--textile-ochre) / 0.4) 80%,
+    transparent 100%
+  );
+}
+
+.diamond-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 4L28 20L20 36L12 20Z' fill='none' stroke='%23c2956a' stroke-width='0.5' opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 40px 40px;
+}
+
 
 /**
  * Using the elevate system.
