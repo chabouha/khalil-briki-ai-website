@@ -34,9 +34,8 @@ import ciro1 from "@assets/Ciro_(1)_1771707549351.jpg";
 import ciro2 from "@assets/Ciro_(2)_1771707549351.jpg";
 import ciro3 from "@assets/Ciro_(3)_1771707549351.jpg";
 import heroPhoto from "@assets/Silas_12_1771708035525.jpg";
-import amazighPattern from "@assets/pngtree-amazigh-background-moons-and-stars-picture-image_19909_1772205968269.png";
-import tunisianPattern from "@assets/traditional-tunisian-embroidery-pattern-seamless-600nw-228781_1772205968269.webp";
-import textilePattern from "@assets/cultural-textile-patterns-stockcake_1772205968269.webp";
+import textilePattern from "@assets/cultural-textile-patterns-stockcake_1772207904242.webp";
+import tunisianPattern from "@assets/traditional-tunisian-embroidery-pattern-seamless-600nw-228781_1772207904244.webp";
 
 function FadeInSection({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   const ref = useRef(null);
@@ -427,17 +426,17 @@ export default function Home() {
         <motion.div style={{ opacity: heroOpacity, scale: heroScale }} className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-background via-[hsl(var(--textile-indigo)/0.3)] to-[hsl(var(--textile-red-deep)/0.2)]" />
           <div
-            className="absolute inset-0 opacity-[0.07]"
+            className="absolute inset-0 opacity-[0.06]"
             style={{
-              backgroundImage: `url(${amazighPattern})`,
-              backgroundSize: "600px",
+              backgroundImage: `url(${textilePattern})`,
+              backgroundSize: "500px",
               backgroundPosition: "center",
               backgroundRepeat: "repeat",
               mixBlendMode: "soft-light",
             }}
           />
           <div
-            className="absolute right-0 top-0 bottom-0 w-1/3 opacity-[0.04]"
+            className="absolute right-0 top-0 bottom-0 w-1/3 opacity-[0.05]"
             style={{
               backgroundImage: `url(${tunisianPattern})`,
               backgroundSize: "300px",
@@ -550,8 +549,17 @@ export default function Home() {
 
       <main>
       {/* ARTISTIC PROFILE */}
-      <section id="profile" className="relative py-24 md:py-32 diamond-pattern" data-testid="section-profile">
-        <div className="max-w-5xl mx-auto px-6">
+      <section id="profile" className="relative py-24 md:py-32" data-testid="section-profile">
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage: `url(${tunisianPattern})`,
+            backgroundSize: "350px",
+            backgroundPosition: "center",
+            backgroundRepeat: "repeat",
+          }}
+        />
+        <div className="relative max-w-5xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Artistic Profile</SectionLabel>
             <SectionTitle>A Cultural Bridge</SectionTitle>
@@ -677,8 +685,17 @@ export default function Home() {
 
       {/* EDUCATION & MENTORSHIP */}
       <section id="education" className="relative py-24 md:py-32 bg-[hsl(var(--textile-indigo)/0.08)]" data-testid="section-education">
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url(${textilePattern})`,
+            backgroundSize: "450px",
+            backgroundPosition: "center top",
+            backgroundRepeat: "repeat",
+          }}
+        />
         <div className="geometric-divider absolute top-0 left-0 right-0" />
-        <div className="max-w-5xl mx-auto px-6">
+        <div className="relative max-w-5xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Education & Mentorship</SectionLabel>
             <SectionTitle>Music as Living Heritage</SectionTitle>
@@ -707,8 +724,17 @@ export default function Home() {
       </section>
 
       {/* MEDIA SECTION */}
-      <section id="media" className="relative py-24 md:py-32 diamond-pattern" data-testid="section-media">
-        <div className="max-w-5xl mx-auto px-6">
+      <section id="media" className="relative py-24 md:py-32" data-testid="section-media">
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `url(${tunisianPattern})`,
+            backgroundSize: "280px",
+            backgroundPosition: "center",
+            backgroundRepeat: "repeat",
+          }}
+        />
+        <div className="relative max-w-5xl mx-auto px-6">
           <FadeInSection>
             <SectionLabel>Media</SectionLabel>
             <SectionTitle>Listen & Watch</SectionTitle>

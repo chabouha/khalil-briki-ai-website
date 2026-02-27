@@ -30,9 +30,8 @@ A modern, elegant one-page website for Khalil Briki, an Afro-diasporic bassist, 
 - `.diamond-pattern` — Repeating SVG diamond grid background
 
 ### Pattern Images Used
-- Amazigh pattern — Hero section overlay (subtle, 7% opacity)
-- Tunisian embroidery — Hero right edge + Festivals left edge decoration
-- Cultural textile — Contact section background texture
+- Cultural textile (horizontal bands) — Hero full overlay, Education section background
+- Tunisian embroidery (vertical geometric) — Hero right edge, Profile section background, Festivals left edge, Media section background, Contact section background
 
 ## Sections
 1. **Hero** — Full-screen with portrait, Amazigh pattern overlay, name, tagline, CTA buttons
