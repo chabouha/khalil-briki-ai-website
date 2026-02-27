@@ -112,6 +112,7 @@ const PROJECTS = [
   {
     title: "Swing Safado",
     role: "Bassist",
+    spotifyArtistId: "2HAgrBKQLnNvO5Tt4idm6R",
     description: "Within the Afro-descendant energy of Carnaval de Belo Horizonte, Swing Safado embodies the pulse of street bloco culture rooted in Black Brazilian rhythmic traditions. Featuring Latin Grammy-winning producer Dédé Santaklaus and the charismatic Jeffim da Baze, a vocal advocate of anti-racist engagement. In 2026, Swing Safado toured Minas Gerais, culminating in performances on Avenida dos Andradas before more than 150,000 spectators.",
     photos: [
       { src: swingSafado10, alt: "Swing Safado bloco group photo at Carnaval" },
@@ -270,10 +271,13 @@ function ProjectScrollSection({ project, index }: { project: typeof PROJECTS[num
           <span className="inline-block font-mono text-xs tracking-[0.3em] uppercase text-[hsl(var(--textile-ochre)/0.8)] mb-2">
             {project.role}
           </span>
-          <div className="flex flex-col sm:flex-row sm:items-center flex-wrap gap-3 mb-3">
-            <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-[hsl(var(--textile-cream))]">
-              {project.title}
-            </h3>
+          <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-[hsl(var(--textile-cream))] mb-3">
+            {project.title}
+          </h3>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <p className="text-stone-400 text-sm md:text-base leading-relaxed max-w-3xl flex-1">
+              {project.description}
+            </p>
             {project.spotifyArtistId && (
               <iframe
                 src={`https://open.spotify.com/embed/artist/${project.spotifyArtistId}?utm_source=generator&theme=0`}
@@ -282,15 +286,12 @@ function ProjectScrollSection({ project, index }: { project: typeof PROJECTS[num
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
                 loading="lazy"
-                className="rounded-xl border-0 w-full sm:w-[300px] flex-shrink-0"
+                className="rounded-xl border-0 w-full sm:w-[300px] flex-shrink-0 self-start"
                 title={`${project.title} on Spotify`}
                 data-testid={`spotify-player-${slug}`}
               />
             )}
           </div>
-          <p className="text-stone-400 text-sm md:text-base leading-relaxed max-w-3xl">
-            {project.description}
-          </p>
         </div>
       </div>
 
