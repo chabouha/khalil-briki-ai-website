@@ -98,6 +98,7 @@ const PROJECTS = [
   {
     title: "Igara Silva",
     role: "Bassist, Musical Director",
+    spotifyArtistId: "1KO5VbNR8hALupkmuD8FHA",
     description: "Within Igara Silva's evolving instrumental universe — deeply influenced by the tradition of Minas Gerais instrumental music and contemporary Brazilian composition — Briki's bass became a grounding and structural force. During the creative process of O Piano, os Cavalos e o Mar (2024), Briki contributed to arrangement development, shaping a sound that honored regional identity while expanding harmonic and textural possibilities. The celebrated Paulo Santos (Uakti) and Marcus Ruffato also participated, adding sonic depth to collaborative explorations.",
     photos: [
       { src: igara1, alt: "Khalil Briki playing bass on stage with Igara Silva" },
@@ -128,6 +129,7 @@ const PROJECTS = [
   {
     title: "Silas Prado",
     role: "Bassist",
+    spotifyArtistId: "7Mr4XJAVPPZh0CXk9iyWGs",
     description: "Across instrumental jazz sessions and festival stages, Briki's collaboration with Silas Prado unfolds through attentive interplay deeply informed by Afro-Brazilian rhythmic heritage. Briki participated in the presentation of Silas Prado's album Obrigado Mestre, contributing to live interpretations that highlight improvisational dialogue and compositional richness.",
     photos: [
       { src: silas2, alt: "Silas Prado performing with saxophone" },
@@ -137,6 +139,7 @@ const PROJECTS = [
   {
     title: "Tatio",
     role: "Bassist, Guitarist",
+    spotifyArtistId: "7C4o7kUxg8IUZhFmn7WWRu",
     description: "In groove-driven projects with Tatio, Briki demonstrates versatility beyond the bass, contributing guitar and expanding harmonic textures within contemporary Afro-Brazilian frameworks. He participated in the artist's first album presentation, Contrabandeado, produced by Chico Neves — one of Brazil's most respected music producers. Creative chemistry drives the collaboration, while professional rigor sustains it.",
     photos: [
       { src: "/images/project-tatio-1.png", alt: "Tatio groove session" },
@@ -145,6 +148,7 @@ const PROJECTS = [
   {
     title: "Gabriela Viegas",
     role: "Bassist",
+    spotifyArtistId: "72HFnD63sDhMJ20grkrOoN",
     description: "Collaborations with Gabriela Viegas explore territories influenced by African traditions and diasporic memory. Rooted in rhythmic matrices echoing West and Central African heritage, her work bridges Brazilian popular music with ancestral narratives. Briki's bass interacts with percussion-driven arrangements and polyrhythmic structures, reinforcing groove while maintaining harmonic clarity.",
     photos: [
       { src: "/images/project-gabriela-1.png", alt: "African-influenced performance" },
@@ -163,6 +167,7 @@ const PROJECTS = [
   {
     title: "Ciro Belluci",
     role: "Bassist",
+    spotifyArtistId: "0sSZqu5wKJ3yAIE5TeNZqI",
     description: "Ciro Belluci is a multi-talented musician, composer, and interpreter whose work blends deep musical literacy with expressive performance, reimagining Brazilian classics and original compositions. His collaboration with Briki focuses on structural interplay and creative composition, grounded in Afro-diasporic heritage and contemporary expression.",
     photos: [
       { src: ciro1, alt: "Ciro Belluci performing with guitar" },
@@ -265,9 +270,24 @@ function ProjectScrollSection({ project, index }: { project: typeof PROJECTS[num
           <span className="inline-block font-mono text-xs tracking-[0.3em] uppercase text-[hsl(var(--textile-ochre)/0.8)] mb-2">
             {project.role}
           </span>
-          <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-[hsl(var(--textile-cream))] mb-3">
-            {project.title}
-          </h3>
+          <div className="flex flex-col sm:flex-row sm:items-center flex-wrap gap-3 mb-3">
+            <h3 className="font-serif text-2xl md:text-3xl lg:text-4xl text-[hsl(var(--textile-cream))]">
+              {project.title}
+            </h3>
+            {project.spotifyArtistId && (
+              <iframe
+                src={`https://open.spotify.com/embed/artist/${project.spotifyArtistId}?utm_source=generator&theme=0`}
+                width="300"
+                height="80"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                loading="lazy"
+                className="rounded-xl border-0 w-full sm:w-[300px] flex-shrink-0"
+                title={`${project.title} on Spotify`}
+                data-testid={`spotify-player-${slug}`}
+              />
+            )}
+          </div>
           <p className="text-stone-400 text-sm md:text-base leading-relaxed max-w-3xl">
             {project.description}
           </p>
