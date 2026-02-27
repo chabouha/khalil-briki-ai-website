@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import {
@@ -209,6 +211,106 @@ const EDUCATION_TOPICS = [
   { title: "Afro-descendant Musical Roots", description: "Highlighting African and Afro-descendant roots of Brazilian and global music — rhythmic matrices, harmonic architecture, and cross-cultural integration bridging contemporary practice with ancestral knowledge." },
   { title: "Cultural Literacy", description: "Positioning music not only as craft but as living cultural legacy — connecting communities, generations, and diverse traditions through historical and cultural perspectives." },
 ];
+
+gsap.registerPlugin(ScrollTrigger);
+
+const GALLERY_ROW_1 = [
+  { src: igara1, alt: "Khalil Briki with Igara Silva" },
+  { src: swingSafado10, alt: "Swing Safado at Carnaval" },
+  { src: dani1, alt: "With Daniel Faria" },
+  { src: ciro1, alt: "Ciro Belluci performing" },
+  { src: silas2, alt: "Silas Prado saxophone" },
+  { src: igaraBdmg123, alt: "BDMG Instrumental" },
+];
+
+const GALLERY_ROW_2 = [
+  { src: ciro2, alt: "Ciro Belluci piano" },
+  { src: igara5, alt: "Igara Silva live" },
+  { src: dani2, alt: "Daniel Faria guitar" },
+  { src: swingSafado7, alt: "Swing Safado celebration" },
+  { src: igaraBdmg89, alt: "BDMG performance" },
+  { src: silas4, alt: "Briki with Silas Prado" },
+];
+
+const GALLERY_ROW_3 = [
+  { src: igaraBdmg60, alt: "BDMG bass" },
+  { src: dani3, alt: "Full band with Daniel Faria" },
+  { src: igara2, alt: "Igara ensemble" },
+  { src: ciro3, alt: "Ciro Belluci musicians" },
+  { src: heroPhoto, alt: "Khalil Briki portrait" },
+  { src: igara1, alt: "Briki on stage" },
+];
+
+function HorizontalScrollGallery() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
+  const row3Ref = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: "+=200%",
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+        },
+      });
+
+      tl.to(row1Ref.current, { x: "-30%", ease: "none" }, 0);
+      tl.to(row2Ref.current, { x: "20%", ease: "none" }, 0);
+      tl.to(row3Ref.current, { x: "-25%", ease: "none" }, 0);
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const renderRow = (
+    ref: React.RefObject<HTMLDivElement>,
+    images: { src: string; alt: string }[],
+    initialOffset: string,
+  ) => (
+    <div
+      ref={ref as React.RefObject<HTMLDivElement>}
+      className="flex gap-3 md:gap-4 will-change-transform"
+      style={{ transform: `translateX(${initialOffset})` }}
+    >
+      {images.map((img, i) => (
+        <div
+          key={i}
+          className="relative flex-shrink-0 w-[280px] md:w-[360px] lg:w-[420px] aspect-[16/10] rounded-xl overflow-hidden"
+        >
+          <img
+            src={img.src}
+            alt={img.alt}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/40 via-transparent to-stone-950/20" />
+        </div>
+      ))}
+    </div>
+  );
+
+  return (
+    <div
+      ref={sectionRef}
+      className="relative h-screen overflow-hidden flex flex-col justify-center gap-3 md:gap-4 bg-stone-950"
+      data-testid="gallery-horizontal-scroll"
+    >
+      <div className="absolute inset-0 bg-gradient-to-b from-stone-900/30 via-transparent to-stone-900/30 pointer-events-none z-10" />
+      {renderRow(row1Ref, GALLERY_ROW_1, "-10%")}
+      {renderRow(row2Ref, GALLERY_ROW_2, "-30%")}
+      {renderRow(row3Ref, GALLERY_ROW_3, "-5%")}
+    </div>
+  );
+}
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("");
@@ -469,6 +571,9 @@ export default function Home() {
 
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-stone-800/50 to-transparent" />
       </section>
+
+      {/* HORIZONTAL SCROLL GALLERY */}
+      <HorizontalScrollGallery />
 
       {/* SELECTED PROJECTS */}
       <section id="projects" className="relative py-24 md:py-32 bg-stone-900/30" data-testid="section-projects">
